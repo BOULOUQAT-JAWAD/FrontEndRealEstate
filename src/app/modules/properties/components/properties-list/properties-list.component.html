@@ -1,0 +1,5 @@
+<div *ngIf="propertyFetched">
+    <div *ngFor="let property of properties">
+        <app-property-single [propertyData]="property"></app-property-single>
+    </div>
+</div>

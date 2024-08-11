@@ -1,0 +1,9 @@
+<div class="property-card">
+    <h2>{{ propertyData.description }}</h2>
+    <p>{{ propertyData.city }}, {{ propertyData.country }}</p>
+    <p>{{ propertyData.propertyType }} - {{ propertyData.propertyStatus }}</p>
+    <p>{{ propertyData.numberOfRooms }} rooms, {{ propertyData.surface }} sqm</p>
+    <p>Price per night: {{ propertyData.pricePerNight }}$</p>
+    <img *ngIf="propertyData.propertyImages.length > 0" [src]="propertyData.propertyImages[0].image" alt="Property Image">
+    <!-- Add more details as needed -->
+</div>
