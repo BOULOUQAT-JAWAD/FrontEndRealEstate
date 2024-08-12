@@ -1,0 +1,79 @@
+<form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="description">Description:</label>
+        <input id="description" formControlName="description">
+        <div *ngIf="propertyForm.get('description')?.invalid && propertyForm.get('description')?.touched" class="error">
+            Description is required.
+        </div>
+    </div>
+    <div>
+        <label for="country">Country:</label>
+        <input id="country" formControlName="country">
+        <div *ngIf="propertyForm.get('country')?.invalid && propertyForm.get('country')?.touched" class="error">
+            Country is required.
+        </div>
+    </div>
+    <div>
+        <label for="city">City:</label>
+        <input id="city" formControlName="city">
+        <div *ngIf="propertyForm.get('city')?.invalid && propertyForm.get('city')?.touched" class="error">
+            City is required.
+        </div>
+    </div>
+    <div>
+        <label for="propertyType">Property Type:</label>
+        <select id="propertyType" formControlName="propertyType">
+            <option *ngFor="let type of propertyTypes" [value]="type">{{ type }}</option>
+        </select>
+        <div *ngIf="propertyForm.get('propertyType')?.invalid && propertyForm.get('propertyType')?.touched"
+            class="error">
+            Property Type is required.
+        </div>
+    </div>
+    <div>
+        <label for="propertyStatus">Property Status:</label>
+        <select id="propertyStatus" formControlName="propertyStatus">
+            <option *ngFor="let status of propertyStatuses" [value]="status">{{ status }}</option>
+        </select>
+        <div *ngIf="propertyForm.get('propertyStatus')?.invalid && propertyForm.get('propertyStatus')?.touched"
+            class="error">
+            Property Status is required.
+        </div>
+    </div>
+    <div>
+        <label for="numberOfRooms">Number of Rooms:</label>
+        <input type="number" id="numberOfRooms" formControlName="numberOfRooms">
+        <div *ngIf="propertyForm.get('numberOfRooms')?.invalid && propertyForm.get('numberOfRooms')?.touched"
+            class="error">
+            Number of Rooms must be at least 1.
+        </div>
+    </div>
+    <div>
+        <label for="numberOfPersons">Number of Persons:</label>
+        <input type="number" id="numberOfPersons" formControlName="numberOfPersons">
+        <div *ngIf="propertyForm.get('numberOfPersons')?.invalid && propertyForm.get('numberOfPersons')?.touched"
+            class="error">
+            Number of Persons must be at least 1.
+        </div>
+    </div>
+    <div>
+        <label for="surface">Surface:</label>
+        <input type="number" id="surface" formControlName="surface">
+        <div *ngIf="propertyForm.get('surface')?.invalid && propertyForm.get('surface')?.touched" class="error">
+            Surface must be at least 1.
+        </div>
+    </div>
+    <div>
+        <label for="pricePerNight">Price Per Night:</label>
+        <input type="number" id="pricePerNight" formControlName="pricePerNight">
+        <div *ngIf="propertyForm.get('pricePerNight')?.invalid && propertyForm.get('pricePerNight')?.touched"
+            class="error">
+            Price Per Night must be at least 0.
+        </div>
+    </div>
+    <div>
+        <label for="publish">Publish:</label>
+        <input type="checkbox" id="publish" formControlName="publish">
+    </div>
+    <button type="submit">{{ propertyId ? 'Update Property' : 'Create Property' }}</button>
+</form>

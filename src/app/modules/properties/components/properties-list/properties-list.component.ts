@@ -3,6 +3,7 @@ import { PropertyResponse } from '../../models/property-response';
 import { PropertyService } from '../../services/property.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CustomSnackBarService } from 'src/app/shared/custom-snack-bar/custom-snack-bar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-properties-list',
@@ -16,7 +17,11 @@ export class PropertiesListComponent implements OnInit, OnChanges  {
   loading = false;
   error = false;
 
-  constructor(private propertyService: PropertyService, private customSnackBar: CustomSnackBarService) {}
+  constructor(private router: Router,private propertyService: PropertyService, private customSnackBar: CustomSnackBarService) {}
+
+  goToAddPropertyForm() {
+    this.router.navigate(['property/add']);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("ngOnChanges")

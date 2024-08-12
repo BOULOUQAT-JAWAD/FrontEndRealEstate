@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PropertyResponse } from '../../models/property-response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-single',
@@ -10,9 +11,12 @@ export class PropertySingleComponent {
   
   @Input() propertyData!: PropertyResponse;
 
+  constructor(private router:Router){}
+
   onEdit(property: PropertyResponse): void {
     // Implement your edit logic here
     console.log('Edit clicked for:', property);
+    this.router.navigate(['/property/edit', property.propertyId]);
   }
 
   onDelete(property: PropertyResponse): void {

@@ -13,7 +13,7 @@ import { CustomSnackBarService } from 'src/app/shared/custom-snack-bar/custom-sn
 })
 export class PropertyDetailsComponent implements OnInit {
 
-  private propertyId: string | null;
+  private propertyId: number | null;
   property!: PropertyResponse;
   propertyFetched!: boolean;
 
@@ -21,7 +21,7 @@ export class PropertyDetailsComponent implements OnInit {
 
     private location: Location,
   ) {
-    this.propertyId = activeRoute.snapshot.paramMap.get("id");
+    this.propertyId = parseInt(activeRoute.snapshot.paramMap.get("id") || '');
     console.log(this.propertyId)
   }
 

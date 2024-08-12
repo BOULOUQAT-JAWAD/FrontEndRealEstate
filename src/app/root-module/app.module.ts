@@ -7,6 +7,7 @@ import { PropertiesModule } from '../modules/properties/properties.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
