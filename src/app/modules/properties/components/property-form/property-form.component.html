@@ -75,5 +75,9 @@
         <label for="publish">Publish:</label>
         <input type="checkbox" id="publish" formControlName="publish">
     </div>
+    <div>
+        <label for="images">Upload Images:</label>
+        <input type="file" id="images" (change)="onFileChange($event)" accept="image/*" multiple>
+    </div>
     <button type="submit">{{ propertyId ? 'Update Property' : 'Create Property' }}</button>
 </form>

@@ -36,7 +36,6 @@ export class PropertyService {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
 
-
     return this.httpClient.post<PropertyResponse>(`${environment.baseUrl}properties`, request, { headers });
   }
 

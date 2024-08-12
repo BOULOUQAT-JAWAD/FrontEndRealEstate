@@ -16,6 +16,7 @@ export class PropertyFormComponent implements OnInit {
 
   propertyForm!: FormGroup;
   propertyId?: number;
+  selectedFiles: File[] = [];  
 
   propertyTypes = Object.values(PropertyType);
   propertyStatuses = Object.values(PropertyStatus);
@@ -27,11 +28,15 @@ export class PropertyFormComponent implements OnInit {
     private router: Router
   ) { }
 
+  onFileChange(event: any): void {
+    if (event.target.files) {
+      this.selectedFiles = Array.from(event.target.files);
+    }
+  }
+
   ngOnInit(): void {
-    // Initialize the form
     this.initializeForm();
 
-    // Identify which route is active: add or edit
     const currentRoute = this.route.snapshot.routeConfig?.path;
     console.log('currentRoute : ' + currentRoute);
 
@@ -41,15 +46,11 @@ export class PropertyFormComponent implements OnInit {
         const id = Number(idParam);
         if (!isNaN(id)) {
           this.propertyId = id;
-          this.loadProperty(id); // Load the property data for editing
+          this.loadProperty(id);
         } else {
           console.error('Invalid ID:', idParam);
         }
       }
-    } else if (currentRoute === 'property/add') {
-      // This is the add route
-      console.log('Adding a new property');
-      // No need to fetch any property data, as this is a new property
     }
   }
 
@@ -88,17 +89,6 @@ export class PropertyFormComponent implements OnInit {
         pricePerNight: property.pricePerNight,
         publish: property.publish
       });
-
-      // // If there are images, populate the form array
-      // const propertyImagesControl = this.propertyForm.get('propertyImages');
-      // if (propertyImagesControl && property.propertyImages) {
-      //   property.propertyImages.forEach(image => {
-      //     propertyImagesControl.push(this.fb.group({
-      //       propertyImagesId: image.propertyImagesId,
-      //       image: image.image
-      //     }));
-      //   });
-      // }
     });
   }
 
@@ -110,6 +100,10 @@ export class PropertyFormComponent implements OnInit {
       formData.append('property', new Blob([JSON.stringify(property)], {
         type: 'application/json'
       }));
+      
+      this.selectedFiles.forEach((file, index) => {
+        formData.append('images', file, file.name);
+      });
   
       if (this.propertyId) {
         property.propertyId = this.propertyId;
