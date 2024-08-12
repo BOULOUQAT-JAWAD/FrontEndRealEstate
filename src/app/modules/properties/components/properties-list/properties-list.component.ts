@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { PropertyResponse } from '../../models/property-response';
 import { PropertyService } from '../../services/property.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CustomSnackBarService } from 'src/app/shared/custom-snack-bar/custom-snack-bar.service';
 
 @Component({
   selector: 'app-properties-list',
@@ -12,8 +13,10 @@ export class PropertiesListComponent implements OnInit, OnChanges  {
   
   propertyFetched!: boolean;
   properties: PropertyResponse[] = [];
+  loading = false;
+  error = false;
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService, private customSnackBar: CustomSnackBarService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("ngOnChanges")
@@ -22,7 +25,7 @@ export class PropertiesListComponent implements OnInit, OnChanges  {
   ngOnInit(): void {
     this.propertyFetched=false;
     if (this.propertyService.properties.length == 0){
-      this.fetchAllProduct()
+      this.fetchAllProperties()
     }
     else {
       this.properties = this.propertyService.properties;
@@ -30,16 +33,29 @@ export class PropertiesListComponent implements OnInit, OnChanges  {
     }
   }
 
-  fetchAllProduct(){
+  fetchAllProperties(){
+    this.loading = true;
+    this.error = false;
     this.propertyService.getAllProperties().subscribe(
-      (response)=>{
-        this.properties=response;
-        this.propertyFetched=true;
+      (response) => {
+        this.properties = response;
+        this.propertyFetched = true;
+        this.loading = false;
+        if (this.properties.length === 0) {
+          this.customSnackBar.show('Aucune propriété trouvée.', 'info', 'blue');
+        }
       },
-      (error: HttpErrorResponse) =>{
+      (error: HttpErrorResponse) => {
         console.error(error);
+        this.loading = false;
+        this.error = true;
+        this.customSnackBar.show('Erreur lors de la récupération des propriétés. Veuillez réessayer plus tard.', 'error', 'red');
       }
     )
+  }
+
+  retryFetchingProperties() {
+    this.fetchAllProperties();
   }
   
 }

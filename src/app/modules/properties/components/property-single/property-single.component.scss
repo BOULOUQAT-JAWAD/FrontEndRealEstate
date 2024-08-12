@@ -1,0 +1,25 @@
+.property-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    position: relative;
+
+    .property-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+    }
+
+    img {
+        margin-top: 16px;
+        max-width: 100%;
+        border-radius: 8px;
+    }
+}

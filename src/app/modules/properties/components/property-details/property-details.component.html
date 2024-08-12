@@ -1,0 +1,4 @@
+<app-spinner *ngIf="!propertyFetched"></app-spinner>
+<div *ngIf="propertyFetched">
+        <app-property-single [propertyData]="property"></app-property-single>
+</div>

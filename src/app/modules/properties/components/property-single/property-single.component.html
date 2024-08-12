@@ -1,9 +1,19 @@
 <div class="property-card">
-    <h2>{{ propertyData.description }}</h2>
+    <div class="property-header">
+        <h2>{{ propertyData.description }}</h2>
+        <div class="action-buttons">
+            <button mat-icon-button color="primary" (click)="onEdit(propertyData)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete(propertyData)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
     <p>{{ propertyData.city }}, {{ propertyData.country }}</p>
     <p>{{ propertyData.propertyType }} - {{ propertyData.propertyStatus }}</p>
     <p>{{ propertyData.numberOfRooms }} rooms, {{ propertyData.surface }} sqm</p>
     <p>Price per night: {{ propertyData.pricePerNight }}$</p>
-    <img *ngIf="propertyData.propertyImages.length > 0" [src]="propertyData.propertyImages[0].image" alt="Property Image">
-    <!-- Add more details as needed -->
+    <img *ngIf="propertyData.propertyImages.length > 0" [src]="propertyData.propertyImages[0].image"
+        alt="Property Image">
 </div>

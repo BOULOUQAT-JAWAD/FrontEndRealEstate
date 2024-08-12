@@ -10,4 +10,13 @@ export class PropertySingleComponent {
   
   @Input() propertyData!: PropertyResponse;
 
+  onEdit(property: PropertyResponse): void {
+    // Implement your edit logic here
+    console.log('Edit clicked for:', property);
+  }
+
+  onDelete(property: PropertyResponse): void {
+    // Implement your delete logic here
+    console.log('Delete clicked for:', property);
+  }
 }

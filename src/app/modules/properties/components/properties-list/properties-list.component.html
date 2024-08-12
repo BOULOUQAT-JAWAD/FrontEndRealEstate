@@ -1,5 +1,17 @@
-<div *ngIf="propertyFetched">
-    <div *ngFor="let property of properties">
-        <app-property-single [propertyData]="property"></app-property-single>
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div *ngIf="!loading && !error">
+    <div *ngIf="properties.length > 0">
+        <div *ngFor="let property of properties">
+            <app-property-single [propertyData]="property"></app-property-single>
+        </div>
     </div>
+    <div *ngIf="properties.length === 0">
+        <p>Aucune propriété disponible pour le moment.</p>
+    </div>
+</div>
+
+<div *ngIf="error" class="error-container">
+    <p>Une erreur s'est produite lors de la récupération des propriétés. Veuillez réessayer plus tard.</p>
+    <button mat-raised-button color="primary" (click)="retryFetchingProperties()">Réessayer</button>
 </div>
