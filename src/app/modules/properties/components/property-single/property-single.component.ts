@@ -13,6 +13,12 @@ export class PropertySingleComponent {
 
   constructor(private router:Router){}
 
+  onShow(property: PropertyResponse): void {
+    // Implement your edit logic here
+    console.log('Show clicked for:', property);
+    this.router.navigate(['/properties', property.propertyId]);
+  }
+
   onEdit(property: PropertyResponse): void {
     // Implement your edit logic here
     console.log('Edit clicked for:', property);

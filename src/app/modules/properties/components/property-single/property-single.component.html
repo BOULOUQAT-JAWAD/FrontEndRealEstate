@@ -2,6 +2,9 @@
     <div class="property-header">
         <h2>{{ propertyData.description }}</h2>
         <div class="action-buttons">
+            <button mat-icon-button color="primary" (click)="onShow(propertyData)">
+                <mat-icon>visibility</mat-icon>
+            </button>
             <button mat-icon-button color="primary" (click)="onEdit(propertyData)">
                 <mat-icon>edit</mat-icon>
             </button>

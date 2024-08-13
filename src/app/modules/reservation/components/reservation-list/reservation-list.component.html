@@ -1,0 +1,46 @@
+<div>
+    <form (ngSubmit)="filterReservations(propertyId, checkinDate, checkoutDate, status)">
+        <label for="checkinDate">Date d'arrivée:</label>
+        <input type="date" id="checkinDate" [(ngModel)]="checkinDate" name="checkinDate">
+
+        <label for="checkoutDate">Date de départ:</label>
+        <input type="date" id="checkoutDate" [(ngModel)]="checkoutDate" name="checkoutDate">
+
+        <label for="status">Statut:</label>
+        <select id="status" [(ngModel)]="status" name="status">
+            <option *ngFor="let status of ReservationStatusEnum | keyvalue" [value]="status.value">{{ status.value }}
+            </option>
+        </select>
+
+        <button type="submit">Filtrer</button>
+    </form>
+
+    <app-spinner *ngIf="loading"></app-spinner>
+
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    <table *ngIf="!loading && !errorMessage && reservations.length > 0">
+        <thead>
+            <tr>
+                <th>ID Réservation</th>
+                <th>ID Propriété</th>
+                <th>Date d'arrivée</th>
+                <th>Date de départ</th>
+                <th>Statut</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reservation of reservations">
+                <app-reservation-single [reservation]="reservation"></app-reservation-single>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!loading && !errorMessage && reservations.length === 0">
+        Aucune réservation trouvée.
+    </div>
+</div>

@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class PropertiesListComponent implements OnInit, OnChanges  {
   
-  propertyFetched!: boolean;
   properties: PropertyResponse[] = [];
   loading = false;
   error = false;
@@ -28,13 +27,11 @@ export class PropertiesListComponent implements OnInit, OnChanges  {
   }
   
   ngOnInit(): void {
-    this.propertyFetched=false;
     if (this.propertyService.properties.length == 0){
       this.fetchAllProperties()
     }
     else {
       this.properties = this.propertyService.properties;
-      this.propertyFetched=true;
     }
   }
 
@@ -44,7 +41,6 @@ export class PropertiesListComponent implements OnInit, OnChanges  {
     this.propertyService.getAllProperties().subscribe(
       (response) => {
         this.properties = response;
-        this.propertyFetched = true;
         this.loading = false;
         if (this.properties.length === 0) {
           this.customSnackBar.show('Aucune propriété trouvée.', 'info', 'blue');

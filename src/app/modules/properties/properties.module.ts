@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AppRoutingModule } from 'src/app/root-module/app-routing.module';
+import { ReservationModule } from '../reservation/reservation.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AppRoutingModule } from 'src/app/root-module/app-routing.module';
     MatButtonModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    ReservationModule
   ],
   exports: [
     PropertiesListComponent,

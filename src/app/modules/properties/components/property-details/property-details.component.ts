@@ -14,7 +14,7 @@ import { CustomSnackBarService } from 'src/app/shared/custom-snack-bar/custom-sn
 export class PropertyDetailsComponent implements OnInit {
 
   private propertyId: number | null;
-  property!: PropertyResponse;
+  propertyData!: PropertyResponse;
   propertyFetched!: boolean;
 
   constructor(private activeRoute: ActivatedRoute, private propertyService: PropertyService, private customSnackBar: CustomSnackBarService,
@@ -31,7 +31,7 @@ export class PropertyDetailsComponent implements OnInit {
       this.fetchProperty()
     }
     else {
-      this.property = this.propertyService.property;
+      this.propertyData = this.propertyService.property;
       this.propertyFetched = true;
     }
   }
@@ -39,7 +39,7 @@ export class PropertyDetailsComponent implements OnInit {
   fetchProperty() {
     this.propertyService.getProperty(this.propertyId!).subscribe(
       (response) => {
-        this.property = response;
+        this.propertyData = response;
         this.propertyFetched = true;
       },
       (error: HttpErrorResponse) => {
