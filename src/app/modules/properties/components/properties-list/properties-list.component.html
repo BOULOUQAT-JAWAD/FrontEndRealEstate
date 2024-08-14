@@ -1,6 +1,18 @@
 <button mat-raised-button color="primary" (click)="goToAddPropertyForm()">
     Ajouter une Propriété
 </button>
+
+<div class="filter-section">
+    <label for="startDate">Date de début:</label>
+    <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate">
+
+    <label for="endDate">Date de fin:</label>
+    <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate">
+
+    <button mat-raised-button color="primary" (click)="fetchOccupiedProperties()">Propriétés Occupées</button>
+    <button mat-raised-button color="primary" (click)="fetchAvailableProperties()">Propriétés Disponibles</button>
+</div>
+
 <app-spinner *ngIf="loading"></app-spinner>
 
 <div *ngIf="!loading && !error">

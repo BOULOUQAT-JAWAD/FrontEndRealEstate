@@ -13,7 +13,7 @@ export class ReservationService {
   public reservations: ReservationResponse[] = []
   public reservation?: ReservationResponse;
 
-  token: String = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZTNAZXhhbXBsZS5jb20iLCJyb2xlcyI6IltUUkFWRUxFUl0iLCJleHAiOjE3MjM1Njk5NTJ9.Un-0aGRzOohQRT3MygsJXAPqe_3NfBaqqecZoyiaQyM";
+  token: String = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZTNAZXhhbXBsZS5jb20iLCJyb2xlcyI6IltDTElFTlRdIiwiZXhwIjoxNzIzNjM1NjgxfQ.AM1wsAyqxRnYsDV6f3sDqlrMWvjm8zblD1ogw8G23xA";
 
   constructor(
     private httpClient: HttpClient

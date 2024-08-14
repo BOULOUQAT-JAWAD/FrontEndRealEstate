@@ -13,8 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
-    SharedModule
   ],
   exports: [
     ReservationListComponent,

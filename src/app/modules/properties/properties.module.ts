@@ -7,7 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PropertyFormComponent } from './components/property-form/property-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -32,12 +32,14 @@ import { ReservationModule } from '../reservation/reservation.module';
     MatButtonModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    ReservationModule
+    ReservationModule,
+    FormsModule
   ],
   exports: [
     PropertiesListComponent,
     PropertyDetailsComponent,
-    PropertyFormComponent
+    PropertyFormComponent,
+    PropertySingleComponent,
   ] 
 })
 export class PropertiesModule { }

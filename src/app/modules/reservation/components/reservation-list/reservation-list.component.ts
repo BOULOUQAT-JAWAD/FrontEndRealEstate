@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ReservationResponse } from '../../models/reservation-response';
 import { ReservationStatus } from '../../models/reservation-status';
 import { ReservationService } from '../../services/reservation.service';
@@ -8,15 +8,15 @@ import { ReservationService } from '../../services/reservation.service';
   templateUrl: './reservation-list.component.html',
   styleUrls: ['./reservation-list.component.scss']
 })
-export class ReservationListComponent {
+export class ReservationListComponent implements OnInit {
 
   @Input() propertyId!: number;
   loading = false;
   errorMessage: string | null = null;
 
   reservations: ReservationResponse[] = [];
-  checkinDate?: string = '2024-08-01';
-  checkoutDate?: string = '2024-08-15';
+  checkinDate?: string;
+  checkoutDate?: string;
   status?: ReservationStatus = ReservationStatus.CONFIRME;
   
   public ReservationStatusEnum = ReservationStatus;
@@ -24,12 +24,21 @@ export class ReservationListComponent {
   constructor(private reservationService: ReservationService) { }
 
   ngOnInit(): void {
+    const today = new Date();
+    this.checkinDate = today.toISOString().split('T')[0];
     this.getReservations();
   }
 
   getReservations(): void {
     this.loading = true;
     this.errorMessage = null;
+
+    if (this.checkoutDate && this.checkinDate && this.checkoutDate < this.checkinDate) {
+      this.errorMessage = "La date de départ ne peut pas être antérieure à la date d'arrivée.";
+      this.loading = false;
+      return;
+    }
+
     this.reservationService.getAllReservations(this.propertyId, this.checkinDate, this.checkoutDate, this.status)
       .subscribe({
         next: (data: ReservationResponse[]) => {
@@ -45,11 +54,13 @@ export class ReservationListComponent {
       });
   }
 
-  filterReservations(propertyId: number, checkinDate?: string, checkoutDate?: string, status?: ReservationStatus): void {
-    this.propertyId = propertyId;
-    this.checkinDate = checkinDate;
-    this.checkoutDate = checkoutDate;
-    this.status = status;
+  filterReservations(): void {
     this.getReservations();
+  }
+
+  clearFilter(): void {
+    this.checkinDate = undefined;
+    this.checkoutDate = undefined;
+    this.status = undefined;
   }
 }
