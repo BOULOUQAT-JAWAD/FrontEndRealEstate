@@ -48,10 +48,8 @@ export class ReservationListComponent implements OnInit {
           console.error('Error fetching reservations', err);
           this.errorMessage = 'Erreur lors de la récupération des réservations. Veuillez réessayer plus tard.';
         },
-        complete: () => {
-          this.loading = false;
-        }
       });
+      this.loading = false;
   }
 
   filterReservations(): void {

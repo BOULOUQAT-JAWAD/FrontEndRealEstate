@@ -13,7 +13,7 @@ export class ReservationService {
   public reservations: ReservationResponse[] = []
   public reservation?: ReservationResponse;
 
-  token: String = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZTNAZXhhbXBsZS5jb20iLCJyb2xlcyI6IltDTElFTlRdIiwiZXhwIjoxNzIzNjM1NjgxfQ.AM1wsAyqxRnYsDV6f3sDqlrMWvjm8zblD1ogw8G23xA";
+  token: String = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZTNAZXhhbXBsZS5jb20iLCJyb2xlcyI6IltDTElFTlRdIiwiZXhwIjoxNzIzNzMwMzg0fQ.Lrt3pPp2LaY_xbiTWA2HtTpyCQyl-chu-zrF3Ez2S6w";
 
   constructor(
     private httpClient: HttpClient
@@ -21,7 +21,7 @@ export class ReservationService {
 
   public getAllReservations(propertyId: number, checkinDate?: string, checkoutDate?: string, status?: string): Observable<ReservationResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
     let params = new HttpParams()
       .set('propertyId', propertyId.toString());

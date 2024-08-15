@@ -1,3 +1,5 @@
+import { PjService } from "../../pj-services/models/pj-service";
+
 export interface PropertyRequest {
     propertyId?: number;
     description: string;
@@ -10,4 +12,5 @@ export interface PropertyRequest {
     surface: number;
     pricePerNight: number;
     publish: boolean;
+    pjServices: PjService[]
   }

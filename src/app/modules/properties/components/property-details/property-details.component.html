@@ -5,17 +5,18 @@
         <p>{{ propertyData.propertyType }} - {{ propertyData.propertyStatus }}</p>
         <p>{{ propertyData.numberOfRooms }} rooms, {{ propertyData.surface }} sqm</p>
         <p>Price per night: {{ propertyData.pricePerNight }}$</p>
-        <img *ngIf="propertyData.propertyImages.length > 0" [src]="propertyData.propertyImages[0].image" alt="Property Image">
+        <img *ngIf="propertyData.propertyImages.length > 0" [src]="propertyData.propertyImages[0].image"
+            alt="Property Image">
     </div>
-    
+
     <div class="property-details">
+        <div class="services">
+            <h3>Services</h3>
+            <app-pj-services-list [pjServices]="propertyData.pjServices"></app-pj-services-list>
+        </div>
         <div class="reservations">
             <h3>Reservations</h3>
             <app-reservation-list [propertyId]="propertyData.propertyId"></app-reservation-list>
-        </div>
-        <div class="services">
-            <h3>Services</h3>
-            <!-- Services content goes here -->
         </div>
     </div>
 </div>

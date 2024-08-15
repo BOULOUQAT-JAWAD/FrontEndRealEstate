@@ -1,0 +1,21 @@
+<div>
+    <table *ngIf="pjServices.length > 0">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pjService of pjServices">
+                <app-pj-services-single [pjService]="pjService"></app-pj-services-single>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="pjServices.length === 0">
+        Aucune réservation trouvée.
+    </div>
+</div>

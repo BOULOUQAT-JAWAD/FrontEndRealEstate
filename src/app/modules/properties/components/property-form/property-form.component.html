@@ -79,5 +79,13 @@
         <label for="images">Upload Images:</label>
         <input type="file" id="images" (change)="onFileChange($event)" accept="image/*" multiple>
     </div>
+    <div>
+        <label>Services:</label>
+        <div *ngFor="let service of selectedPjServices">
+            <input type="checkbox" [value]="service.pjServiceId" (change)="onServiceChange($event, service)"
+                [checked]="propertyForm.value.pjServices.includes(service.pjServiceId)">
+            {{ service.title }}
+        </div>
+    </div>
     <button type="submit">{{ propertyId ? 'Update Property' : 'Create Property' }}</button>
 </form>
