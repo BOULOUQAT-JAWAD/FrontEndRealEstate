@@ -1,4 +1,4 @@
-<app-my-dashboard></app-my-dashboard>
+<app-client-sidebar></app-client-sidebar>
 <app-spinner *ngIf="!propertyFetched"></app-spinner>
 <div *ngIf="propertyFetched" class="content-wrapper">
     <div class="container-fluid">
@@ -24,7 +24,7 @@
                                         {{ propertyData.city }}, {{ propertyData.country }}
                                         <i [ngClass]="{
                                             'approved': propertyData.propertyStatus === 'Propre',
-                                            'cancelled': propertyData.propertyStatus === 'Sale'
+                                            'pending': propertyData.propertyStatus === 'Sale'
                                         }">
                                             {{ propertyData.propertyStatus }}
                                         </i>

@@ -13,7 +13,7 @@ export class ReservationListComponent implements OnInit {
 
   @Input() propertyId: number | undefined;
   loading = false;
-  isIncomeRoute = false;
+  isDashBoardRoute = false;
   errorMessage: string | null = null;
 
   reservations: ReservationResponse[] = [];
@@ -27,8 +27,8 @@ export class ReservationListComponent implements OnInit {
 
   checkIfIncomeRoute(): void {
     const url = this.router.url;
-    this.isIncomeRoute = url.includes('/client/income');
-    console.log("isIncomeRoute : "+this.isIncomeRoute);
+    this.isDashBoardRoute = url.includes('/client/dashboard');
+    console.log("isDashBoardRoute : "+this.isDashBoardRoute);
   }
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class ReservationListComponent implements OnInit {
       return;
     }
 
-    if(this.isIncomeRoute == false){
+    if(this.isDashBoardRoute == false){
       this.reservationService.getPropertyReservations(this.propertyId!, this.checkinDate, this.checkoutDate, this.status)
         .subscribe({
           next: (data: ReservationResponse[]) => {
@@ -62,7 +62,7 @@ export class ReservationListComponent implements OnInit {
         this.loading = false;
     }
     else{
-      this.reservationService.getClientReservations(this.checkinDate, this.checkoutDate, this.status)
+      this.reservationService.getClientReservationsDateRange(this.checkinDate, this.checkoutDate, this.status)
         .subscribe({
           next: (data: ReservationResponse[]) => {
             this.reservations = data;
@@ -87,7 +87,7 @@ export class ReservationListComponent implements OnInit {
   clearFilter(): void {
     this.checkinDate = undefined;
     this.checkoutDate = undefined;
-    if(this.isIncomeRoute == false){
+    if(this.isDashBoardRoute == false){
       this.status = undefined;
     }
   }

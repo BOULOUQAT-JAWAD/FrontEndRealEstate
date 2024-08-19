@@ -12,14 +12,12 @@ const routes: Routes = [
   {
     path: "client",
     children: [
-      { path: "", component: MyDashboardComponent, },
+      { path: "dashboard", component: MyDashboardComponent, },
       { path: "properties", component: PropertiesListComponent, },
       { path: "properties/:id", component: PropertyDetailsComponent },
       { path: 'property/add', component: PropertyFormComponent },
       { path: 'property/edit/:id', component: PropertyFormComponent },
-      { path: 'property/delete/:id', component: PropertySingleComponent },
-      { path: 'income', component: ReservationListComponent },
-      { path: 'spent', component: ProviderInvoicesListComponent },
+      { path: 'property/delete/:id', component: PropertySingleComponent }
     ]
   },
   {

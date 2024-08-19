@@ -7,12 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ClientSidebarComponent } from './client-sidebar/client-sidebar.component';
 
 @NgModule({
   declarations: [
     SpinnerComponent,
     CustomSnackBarComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ClientSidebarComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   exports: [
     SpinnerComponent,
-    CustomSnackBarComponent
+    CustomSnackBarComponent,
+    ClientSidebarComponent
   ]
 })
 export class SharedModule { }

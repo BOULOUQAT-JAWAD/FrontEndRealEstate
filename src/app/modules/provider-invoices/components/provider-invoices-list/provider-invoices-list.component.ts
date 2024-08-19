@@ -12,6 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ProviderInvoicesListComponent implements OnInit, OnChanges {
   
+  startDate!: string;
+  endDate!: string;
+
   clientReservationsServices: ProviderInvoice[] = [];
   clientPropertiessServices: ProviderInvoice[] = [];
 
@@ -28,23 +31,25 @@ export class ProviderInvoicesListComponent implements OnInit, OnChanges {
   }
   
   ngOnInit(): void {
-    if (this.providerInvoiceService.clientReservationsServices.length === 0) {
-      this.fetchReservationsInvoices();
-    } else {
-      this.clientReservationsServices = this.providerInvoiceService.clientReservationsServices;
-    }
+    const today = new Date();
+    const nextDate = new Date();
+    nextDate.setDate(today.getDate() + 30);
 
-    if (this.providerInvoiceService.clientPropertiessServices.length === 0) {
-      this.fetchPropertiesInvoices();
-    } else {
-      this.clientPropertiessServices = this.providerInvoiceService.clientPropertiessServices;
-    }
+    this.startDate = today.toISOString().split('T')[0];
+    this.endDate = nextDate.toISOString().split('T')[0];
+
+    this.fetchInvoices();
+  }
+
+  fetchInvoices(): void {
+    this.fetchReservationsInvoices();
+    this.fetchPropertiesInvoices();
   }
 
   fetchReservationsInvoices() {
     this.loadingReservation = true;
     this.errorReservation = false;
-    this.providerInvoiceService.getClientReservationsServices().subscribe(
+    this.providerInvoiceService.getClientReservationsServices(this.startDate, this.endDate).subscribe(
       (response) => {
         this.clientReservationsServices = response;
         this.loadingReservation = false;
@@ -64,7 +69,7 @@ export class ProviderInvoicesListComponent implements OnInit, OnChanges {
   fetchPropertiesInvoices() {
     this.loadingProperty = true;
     this.errorProperty = false;
-    this.providerInvoiceService.getClientPropertiesServices().subscribe(
+    this.providerInvoiceService.getClientPropertiesServices(this.startDate, this.endDate).subscribe(
       (response) => {
         this.clientPropertiessServices = response;
         this.loadingProperty = false;
@@ -81,4 +86,13 @@ export class ProviderInvoicesListComponent implements OnInit, OnChanges {
     );
   }
 
+  filterInvoices(): void {
+    this.fetchInvoices();
+  }
+
+  getTotalCharges(): number {
+    const reservationCharges = this.clientReservationsServices.reduce((sum, invoice) => sum + invoice.gain, 0);
+    const propertyCharges = this.clientPropertiessServices.reduce((sum, invoice) => sum + invoice.gain, 0);
+    return reservationCharges + propertyCharges;
+  }
 }

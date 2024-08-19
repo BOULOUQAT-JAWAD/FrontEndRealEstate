@@ -1,21 +1,21 @@
 <div class="box_general padding_bottom">
     <div class="header_box version_2">
-        <h2><i class="fa fa-filter"></i>Filtrer les Réservations</h2>
+        <h2><i class="fa fa-filter"></i>{{isDashBoardRoute == false ? 'Filtrer les Réservations' : 'Filtrer les revenus par date : '}}</h2>
     </div>
     <form (ngSubmit)="filterReservations()" class="form-inline">
         <div class="form-group">
-            <label for="checkinDate">{{isIncomeRoute == false ? 'Date d\'arrivée:' : 'Du : '}}</label>
+            <label for="checkinDate">{{isDashBoardRoute == false ? 'Date d\'arrivée:' : 'Du : '}}</label>
             <input type="date" id="checkinDate" [(ngModel)]="checkinDate" name="checkinDate"
                 class="form-control mx-sm-2">
         </div>
 
         <div class="form-group">
-            <label for="checkoutDate">{{isIncomeRoute == false ? 'Date de départ:' : 'à : '}}</label>
+            <label for="checkoutDate">{{isDashBoardRoute == false ? 'Date de départ:' : 'à : '}}</label>
             <input type="date" id="checkoutDate" [(ngModel)]="checkoutDate" name="checkoutDate"
                 class="form-control mx-sm-2">
         </div>
 
-        <div class="form-group" *ngIf="!isIncomeRoute">
+        <div class="form-group" *ngIf="!isDashBoardRoute">
             <label for="status">Statut:</label>
             <select id="status" [(ngModel)]="status" name="status" class="form-control mx-sm-2">
                 <option *ngFor="let status of ReservationStatusEnum | keyvalue" [value]="status.value">{{ status.value
@@ -34,8 +34,19 @@
     {{ errorMessage }}
 </div>
 
-<div *ngIf="reservations.length > 0">
-    <strong>Total des Revenus: {{ getTotalIncome()}} €</strong>
+<!-- Total Income Card -->
+<div *ngIf="isDashBoardRoute && reservations.length > 0" class="card text-white bg-success mb-3">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="card-title"><i class="fa fa-money"></i> Total des Revenus</h4>
+                <p class="card-text" style="font-size: 1.5em; font-weight: bold;">{{ getTotalIncome() }} €</p>
+            </div>
+            <div>
+                <i class="fa fa-bar-chart fa-3x"></i>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="table-responsive">
@@ -53,7 +64,7 @@
                 <td>{{ reservation.checkinDate }}</td>
                 <td>{{ reservation.checkoutDate }}</td>
                 <td>{{ reservation.status }}</td>
-                <td>{{ reservation.price }}</td>
+                <td>{{ reservation.price }}€</td>
             </tr>
         </tbody>
     </table>
