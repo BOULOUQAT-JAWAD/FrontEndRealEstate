@@ -1,6 +1,12 @@
-.mycontainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding-left:  90px;
-  }
-  
+.content-wrapper {
+    min-height: calc(100vh - 62px - 62px);
+}
+
+.fixed-nav {
+    padding-top: 56px;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 62px);
+    padding-top: 1rem;
+}

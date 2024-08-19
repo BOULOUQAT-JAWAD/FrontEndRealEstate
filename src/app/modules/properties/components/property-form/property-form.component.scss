@@ -1,5 +1,9 @@
 .error {
-    color: red;
-    font-size: 0.875em;
-    margin-top: 4px;
-  }
+  color: red;
+  font-size: 0.875em;
+  margin-top: 4px;
+}
+
+.readonly-checkbox {
+  pointer-events: none;
+}

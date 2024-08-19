@@ -1,0 +1,27 @@
+<h3>Réservation</h3>
+<app-spinner *ngIf="loadingReservation"></app-spinner>
+
+<div *ngIf="!loadingReservation && !errorReservation">
+    <div *ngIf="clientReservationsServices.length > 0">
+        <div *ngFor="let reservationService of clientReservationsServices">
+            <app-provider-invoices-single [providerInvoice]="reservationService"></app-provider-invoices-single>
+        </div>
+    </div>
+    <div *ngIf="clientReservationsServices.length === 0">
+        <p>Aucune facture de réservation disponible pour le moment.</p>
+    </div>
+</div>
+
+<h3>Propriété</h3>
+<app-spinner *ngIf="loadingProperty"></app-spinner>
+
+<div *ngIf="!loadingProperty && !errorProperty">
+    <div *ngIf="clientPropertiessServices.length > 0">
+        <div *ngFor="let propertyService of clientPropertiessServices">
+            <app-provider-invoices-single [providerInvoice]="propertyService"></app-provider-invoices-single>
+        </div>
+    </div>
+    <div *ngIf="clientPropertiessServices.length === 0">
+        <p>Aucune facture de réservation disponible pour le moment.</p>
+    </div>
+</div>

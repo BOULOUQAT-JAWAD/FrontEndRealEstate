@@ -97,7 +97,7 @@ export class PropertyFormComponent implements OnInit {
       occupiedFrom: [null],
       occupiedTo: [null],
       pricePerNight: [0, [Validators.required, Validators.min(0)]],
-      publish: [false, Validators.required],
+      publish: [false],
       pjServices: [[]], 
     });
   }
@@ -150,14 +150,14 @@ export class PropertyFormComponent implements OnInit {
         property.propertyId = this.propertyId;
         this.propertyService.saveOrUpdateProperty(formData).subscribe(response => {
           console.log('Property updated:', response);
-          this.router.navigate(['/properties']);
+          this.router.navigate(['/client/properties']);
         }, error => {
           console.error('Error updating property:', error);
         });
       } else {
         this.propertyService.saveOrUpdateProperty(formData).subscribe(response => {
           console.log('Property created:', response);
-          this.router.navigate(['/properties']);
+          this.router.navigate(['/client/properties']);
         }, error => {
           console.error('Error creating property:', error);
         });

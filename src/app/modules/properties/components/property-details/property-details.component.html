@@ -1,21 +1,61 @@
+<app-my-dashboard></app-my-dashboard>
 <app-spinner *ngIf="!propertyFetched"></app-spinner>
-<div *ngIf="propertyFetched" class="property-container">
-    <div class="property-card">
-        <p>{{ propertyData.city }}, {{ propertyData.country }}</p>
-        <p>{{ propertyData.propertyType }} - {{ propertyData.propertyStatus }}</p>
-        <p>{{ propertyData.numberOfRooms }} rooms, {{ propertyData.surface }} sqm</p>
-        <p>Price per night: {{ propertyData.pricePerNight }}$</p>
-        <img *ngIf="propertyData.propertyImages.length > 0" [src]="propertyData.propertyImages[0].image"
-            alt="Property Image">
-    </div>
+<div *ngIf="propertyFetched" class="content-wrapper">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">Tableau de bord</a>
+            </li>
+            <li class="breadcrumb-item active">Détails de la Propriété</li>
+        </ol>
 
-    <div class="property-details">
-        <div class="services">
-            <h3>Services</h3>
-            <app-pj-services-list [pjServices]="propertyData.pjServices"></app-pj-services-list>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box_general padding_bottom">
+                    <div class="list_general">
+                        <ul>
+                            <li>
+                                <figure>
+                                    <img *ngIf="propertyData.propertyImages.length > 0"
+                                        [src]="propertyData.propertyImages[0].image" alt="Property Image"
+                                        class="img-fluid">
+                                </figure>
+                                <h4>{{ propertyData.city }}, {{ propertyData.country }} <h4>
+                                        {{ propertyData.city }}, {{ propertyData.country }}
+                                        <i [ngClass]="{
+                                            'approved': propertyData.propertyStatus === 'Propre',
+                                            'cancelled': propertyData.propertyStatus === 'Sale'
+                                        }">
+                                            {{ propertyData.propertyStatus }}
+                                        </i>
+                                    </h4>
+                                </h4>
+                                <ul class="booking_list">
+                                    <li><strong>Type de Propriété:</strong> {{ propertyData.propertyType }}</li>
+                                    <li><strong>Nombre de Chambres:</strong> {{ propertyData.numberOfRooms }} chambres
+                                    </li>
+                                    <li><strong>Surface:</strong> {{ propertyData.surface }} m²</li>
+                                    <li><strong>Prix par Nuit:</strong> {{ propertyData.pricePerNight }}€</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box_general padding_bottom">
+                    <div class="header_box version_2">
+                        <h2><i class="fa fa-cogs"></i>Services</h2>
+                    </div>
+                    <app-pj-services-list [pjServices]="propertyData.pjServices"></app-pj-services-list>
+                </div>
+            </div>
         </div>
-        <div class="reservations">
-            <h3>Reservations</h3>
+
+        <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+                <h2><i class="fa fa-calendar"></i>Réservations</h2>
+            </div>
             <app-reservation-list [propertyId]="propertyData.propertyId"></app-reservation-list>
         </div>
     </div>

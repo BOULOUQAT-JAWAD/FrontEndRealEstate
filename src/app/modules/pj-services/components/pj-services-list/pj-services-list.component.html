@@ -1,5 +1,5 @@
-<div>
-    <table *ngIf="pjServices.length > 0">
+<div class="table-responsive">
+    <table *ngIf="pjServices.length > 0" class="table table-bordered">
         <thead>
             <tr>
                 <th>Titre</th>
@@ -10,12 +10,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let pjService of pjServices">
-                <app-pj-services-single [pjService]="pjService"></app-pj-services-single>
+                <td>{{ pjService.title }}</td>
+                <td>{{ pjService.description }}</td>
+                <td>{{ pjService.price }}€</td>
+                <td>{{ pjService.pjServiceType }}</td>
             </tr>
         </tbody>
     </table>
 
-    <div *ngIf="pjServices.length === 0">
-        Aucune réservation trouvée.
+    <div *ngIf="pjServices.length === 0" class="alert alert-warning">
+        Aucun service trouvé.
     </div>
 </div>

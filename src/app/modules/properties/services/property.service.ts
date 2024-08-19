@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environment/environment";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { environment } from "../../../environment/environment";
 import { PropertyResponse } from '../models/property-response';
 import { Observable } from 'rxjs';
 
@@ -9,18 +9,26 @@ import { Observable } from 'rxjs';
 })
 export class PropertyService {
 
-  public properties:PropertyResponse[]=[]
-  public property?:PropertyResponse;
-  
+  public properties: PropertyResponse[] = []
+  public property?: PropertyResponse;
+
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  public getAllProperties(): Observable<PropertyResponse[]> {
+  public getAllProperties(publish: boolean | null): Observable<PropertyResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
-    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties`, { headers });
+      console.log('publish : '+publish)
+      let params = new HttpParams();
+    if (publish != null) {
+      console.log('HEELlO')
+      params = params
+        .set('publish', publish);
+    }
+
+    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties`, { headers, params });
   }
 
   public getClientOccupiedProperties(startDate: string, endDate: string): Observable<PropertyResponse[]> {
@@ -32,21 +40,21 @@ export class PropertyService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
-    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/occupied`,{headers, params});
+    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/occupied`, { headers, params });
   }
 
   public getClientAvailableProperties(startDate: string, endDate: string): Observable<PropertyResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
 
     let params = new HttpParams()
-    .set('startDate', startDate)
-    .set('endDate', endDate);
+      .set('startDate', startDate)
+      .set('endDate', endDate);
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
     return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/available`, { headers, params });
   }
-  
+
   public getProperty(id: number): Observable<PropertyResponse> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);

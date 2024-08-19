@@ -3,7 +3,7 @@ import { PropertyResponse } from '../../models/property-response';
 import { PropertyService } from '../../services/property.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CustomSnackBarService } from 'src/app/shared/custom-snack-bar/custom-snack-bar.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-properties-list',
@@ -12,16 +12,17 @@ import { Router } from '@angular/router';
 })
 export class PropertiesListComponent implements OnInit, OnChanges {
   
+  publish: boolean | null = null;
   properties: PropertyResponse[] = [];
   loading = false;
   error = false;
   startDate?: string;
   endDate?: string;
 
-  constructor(private router: Router, private propertyService: PropertyService, private customSnackBar: CustomSnackBarService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private propertyService: PropertyService, private customSnackBar: CustomSnackBarService) {}
 
   goToAddPropertyForm() {
-    this.router.navigate(['property/add']);
+    this.router.navigate(['client/property/add']);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -29,6 +30,11 @@ export class PropertiesListComponent implements OnInit, OnChanges {
   }
   
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe(params => {
+      const publishParam = params.get('publish');
+      this.publish = publishParam === 'true';
+      console.log(this.publish);
+    });
       const today = new Date();
       this.startDate = today.toISOString().split('T')[0];
     if (this.propertyService.properties.length === 0) {
@@ -41,7 +47,7 @@ export class PropertiesListComponent implements OnInit, OnChanges {
   fetchAllProperties() {
     this.loading = true;
     this.error = false;
-    this.propertyService.getAllProperties().subscribe(
+    this.propertyService.getAllProperties(this.publish).subscribe(
       (response) => {
         this.properties = response;
         this.loading = false;

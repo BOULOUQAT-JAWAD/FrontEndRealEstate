@@ -1,32 +1,73 @@
-<button mat-raised-button color="primary" (click)="goToAddPropertyForm()">
-    Ajouter une Propriété
-</button>
-
-<div class="filter-section">
-    <label for="startDate">Date de début:</label>
-    <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate">
-
-    <label for="endDate">Date de fin:</label>
-    <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate">
-
-    <button mat-raised-button color="primary" (click)="fetchOccupiedProperties()">Propriétés Occupées</button>
-    <button mat-raised-button color="primary" (click)="fetchAvailableProperties()">Propriétés Disponibles</button>
-</div>
-
-<app-spinner *ngIf="loading"></app-spinner>
-
-<div *ngIf="!loading && !error">
-    <div *ngIf="properties.length > 0">
-        <div *ngFor="let property of properties">
-            <app-property-single [propertyData]="property"></app-property-single>
+<app-my-dashboard></app-my-dashboard>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Propriétés {{ publish != null && publish == true ? 'publiées' : 'non publiées' }}</li>
+        </ol>
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Liste des Propriétés {{ publish != null && publish == true ? 'publiées' : 'non publiées' }}
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div *ngIf="!error && properties.length === 0">
+                        <p>Aucune propriété disponible pour le moment.</p>
+                    </div>
+                    <div *ngIf="error" class="error-container">
+                        <p>Une erreur s'est produite lors de la récupération des propriétés. Veuillez réessayer plus tard.</p>
+                    </div>
+                    <table *ngIf="properties.length > 0"class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Ville</th>
+                                <th>Pays</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Prix par nuit</th>
+                                <th>Publié</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>Ville</th>
+                                <th>Pays</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Prix par nuit</th>
+                                <th>Publié</th>
+                                <th>Actions</th>
+                            </tr>
+                        </tfoot> 
+                        <tbody>
+                            <tr *ngFor="let property of properties">
+                                <td>
+                                    <img [src]="property.propertyImages[0].image" alt="Property Image"
+                                        style="width: 100px; height: auto;">
+                                </td>
+                                <td>{{ property.city }}</td>
+                                <td>{{ property.country }}</td>
+                                <td>{{ property.propertyType }}</td>
+                                <td>{{ property.propertyStatus }}</td>
+                                <td>{{ property.pricePerNight }} €</td>
+                                <td>
+                                    <i [ngClass]="property.publish ? 'approved' : 'cancel'">
+                                        {{ property.publish ? 'Publié' : 'Non Publié' }}
+                                    </i>
+                                </td>
+                                <td>
+                                    <app-property-single [propertyData]="property"></app-property-single>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    <div *ngIf="properties.length === 0">
-        <p>Aucune propriété disponible pour le moment.</p>
-    </div>
-</div>
-
-<div *ngIf="error" class="error-container">
-    <p>Une erreur s'est produite lors de la récupération des propriétés. Veuillez réessayer plus tard.</p>
-    <button mat-raised-button color="primary" (click)="retryFetchingProperties()">Réessayer</button>
 </div>

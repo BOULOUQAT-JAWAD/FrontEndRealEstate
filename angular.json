@@ -30,9 +30,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/vendor/bootstrap/css/bootstrap.min.css",
+              "src/assets/vendor/font-awesome/css/font-awesome.min.css",
+              "src/assets/css/admin.css",
+              "src/assets/css/custom.css"
             ],
-            "scripts": []
+            "scripts": [
+                "src/assets/vendor/jquery/jquery.min.js",
+                "src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
+                "src/assets/vendor/jquery-easing/jquery.easing.min.js",
+                "src/assets/vendor/chart.js/Chart.js",
+                "src/assets/vendor/datatables/jquery.dataTables.js",
+                "src/assets/vendor/datatables/dataTables.bootstrap4.js",
+                "src/assets/vendor/jquery.selectbox-0.2.js",
+                "src/assets/vendor/jquery.magnific-popup.min.js",
+                "src/assets/js/admin.js",
+                "src/assets/js/admin-charts.js"
+            ]
           },
           "configurations": {
             "production": {

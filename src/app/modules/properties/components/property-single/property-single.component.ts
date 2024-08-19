@@ -19,13 +19,13 @@ export class PropertySingleComponent {
   onShow(property: PropertyResponse): void {
     // Implement your edit logic here
     console.log('Show clicked for:', property);
-    this.router.navigate(['/properties', property.propertyId]);
+    this.router.navigate(['/client/properties', property.propertyId]);
   }
 
   onEdit(property: PropertyResponse): void {
     // Implement your edit logic here
     console.log('Edit clicked for:', property);
-    this.router.navigate(['/property/edit', property.propertyId]);
+    this.router.navigate(['/client/property/edit', property.propertyId]);
   }
 
   onDelete(property: PropertyResponse) {
@@ -37,7 +37,7 @@ export class PropertySingleComponent {
           () => {
             console.log('Property deleted:'+property.propertyId);
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['/properties']);
+              this.router.navigate(['/client/properties']);
             });
           },
           error => {

@@ -14,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AppRoutingModule } from 'src/app/root-module/app-routing.module';
 import { ReservationModule } from '../reservation/reservation.module';
 import { PjServicesModule } from '../pj-services/pj-services.module';
+import { ClientDashboardModule } from '../client-dashboard/client-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PjServicesModule } from '../pj-services/pj-services.module';
     ReactiveFormsModule,
     ReservationModule,
     FormsModule,
-    PjServicesModule
+    PjServicesModule,
+    ClientDashboardModule,
   ],
   exports: [
     PropertiesListComponent,

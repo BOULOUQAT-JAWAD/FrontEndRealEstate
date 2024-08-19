@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from '../core/core.module';
+import { ProviderInvoicesModule } from '../modules/provider-invoices/provider-invoices.module';
+import { ClientDashboardModule } from '../modules/client-dashboard/client-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CoreModule } from '../core/core.module';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    CoreModule
+    CoreModule,
+    ProviderInvoicesModule,
+    ClientDashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
