@@ -1,108 +1,160 @@
-<div class="box_general padding_bottom">
-    <div class="header_box version_2">
-        <h2><i class="fa fa-filter"></i>Filtrer les dépenses par date : </h2>
+<div *ngIf="!isDashBoardRoute">
+    <app-client-sidebar></app-client-sidebar>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Tableau de board</a>
+                </li>
+                <li class="breadcrumb-item active">Réservations</li>
+            </ol>
+            <div class="box_general padding_bottom">
+                <div class="header_box version_2">
+                    <h2><i class="fa fa-money"></i> Réservations</h2>
+                </div>
+                <div class="box_general padding_bottom">
+                    <div class="header_box version_2">
+                        <h2><i class="fa fa-filter"></i>Filtrer les dépenses par date : </h2>
+                    </div>
+                    <form (ngSubmit)="fetchInvoices()" class="form-inline">
+                        <div class="form-group">
+                            <label for="startDate">Du : </label>
+                            <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate" class="form-control mx-sm-2">
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="endDate">à : </label>
+                            <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate" class="form-control mx-sm-2">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Statut:</label>
+                            <select id="status" [(ngModel)]="status" name="status" class="form-control mx-sm-2">
+                                <option *ngFor="let status of ProviderInvoiceStatusEnum | keyvalue" [value]="status.value">{{
+                                    status.value
+                                    }}</option>
+                            </select>
+                        </div>
+            
+                        <button type="submit" class="btn btn-primary">Filtrer</button>
+                        <button type="button" (click)="clearFilter()" class="btn btn-secondary mx-sm-2">Effacer les filtres</button>
+                </form>
+                </div>
+                <div class="row">
+            
+                    <!-- Properties Section -->
+                    <div class="col-md-12">
+                        <div class="box_general padding_bottom">
+                            <div class="header_box version_2">
+                                <h2><i class="fa fa-home"></i> Dépenses - Propriété</h2>
+                            </div>
+            
+                            <app-spinner *ngIf="loading"></app-spinner>
+            
+                            <div *ngIf="!loading && !error">
+            
+                                <table *ngIf="clientPropertiessServices.length > 0" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Date</th>
+                                            <th>Statut</th>
+                                            <th>Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let providerInvoice of clientPropertiessServices">
+                                            <td>{{ providerInvoice.providerInvoiceId }}</td>
+                                            <td>{{ providerInvoice.date }}</td>
+                                            <td>{{ providerInvoice.status }}</td>
+                                            <td>{{ providerInvoice.gain }}€</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="clientPropertiessServices.length === 0">
+                                    <p class="alert alert-warning">Aucune facture de propriété disponible pour le moment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-    <form (ngSubmit)="filterInvoices()" class="form-inline">
-        <div class="form-group">
-            <label for="startDate">Du : </label>
-            <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate"
-                class="form-control mx-sm-2">
-        </div>
-
-        <div class="form-group">
-            <label for="endDate">à : </label>
-            <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate"
-                class="form-control mx-sm-2">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Filtrer</button>
-    </form>
 </div>
-<div class="row">
-    <!-- Total Charges Card -->
-    <div class="col-md-12">
-        <div class="card text-white bg-danger mb-3">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h4 class="card-title"><i class="fa fa-money"></i> Total des Dépenses</h4>
-                        <p class="card-text display-4" style="font-size: 1.5em; font-weight: bold;">{{ getTotalCharges()
-                            }} €</p>
-                    </div>
-                    <div>
-                        <i class="fa fa-credit-card fa-3x"></i>
+<div *ngIf="isDashBoardRoute">
+
+    <div class="box_general padding_bottom">
+        <div class="header_box version_2">
+            <h2><i class="fa fa-filter"></i>Filtrer les dépenses par date : </h2>
+        </div>
+        <form (ngSubmit)="fetchInvoices()" class="form-inline">
+            <div class="form-group">
+                <label for="startDate">Du : </label>
+                <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate" class="form-control mx-sm-2">
+            </div>
+
+            <div class="form-group">
+                <label for="endDate">à : </label>
+                <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate" class="form-control mx-sm-2">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </form>
+    </div>
+    <div class="row">
+        <!-- Total Charges Card -->
+        <div class="col-md-12">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="card-title"><i class="fa fa-money"></i> Total des Dépenses</h4>
+                            <p class="card-text display-4" style="font-size: 1.5em; font-weight: bold;">{{
+                                getTotalCharges()
+                                }} €</p>
+                        </div>
+                        <div>
+                            <i class="fa fa-credit-card fa-3x"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Reservations Section -->
-    <div class="col-md-6">
-        <div class="box_general padding_bottom">
-            <div class="header_box version_2">
-                <h2><i class="fa fa-money"></i> Dépenses - Réservation</h2>
-            </div>
-
-            <app-spinner *ngIf="loadingReservation"></app-spinner>
-
-            <div *ngIf="!loadingReservation && !errorReservation">
-                <table *ngIf="clientReservationsServices.length > 0" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Date</th>
-                            <th>Statut</th>
-                            <th>Prix</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let providerInvoice of clientReservationsServices">
-                            <td>{{ providerInvoice.providerInvoiceId }}</td>
-                            <td>{{ providerInvoice.date }}</td>
-                            <td>{{ providerInvoice.status }}</td>
-                            <td>{{ providerInvoice.gain }}€</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div *ngIf="clientReservationsServices.length === 0">
-                    <p class="alert alert-warning">Aucune facture de réservation disponible pour le moment.</p>
+        <!-- Properties Section -->
+        <div class="col-md-12">
+            <div class="box_general padding_bottom">
+                <div class="header_box version_2">
+                    <h2><i class="fa fa-home"></i> Dépenses - Propriété</h2>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Properties Section -->
-    <div class="col-md-6">
-        <div class="box_general padding_bottom">
-            <div class="header_box version_2">
-                <h2><i class="fa fa-home"></i> Dépenses - Propriété</h2>
-            </div>
+                <app-spinner *ngIf="loading"></app-spinner>
 
-            <app-spinner *ngIf="loadingProperty"></app-spinner>
+                <div *ngIf="!loading && !error">
 
-            <div *ngIf="!loadingProperty && !errorProperty">
-                
-                <table *ngIf="clientPropertiessServices.length > 0" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Date</th>
-                            <th>Statut</th>
-                            <th>Prix</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let providerInvoice of clientPropertiessServices">
-                            <td>{{ providerInvoice.providerInvoiceId }}</td>
-                            <td>{{ providerInvoice.date }}</td>
-                            <td>{{ providerInvoice.status }}</td>
-                            <td>{{ providerInvoice.gain }}€</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div *ngIf="clientPropertiessServices.length === 0">
-                    <p class="alert alert-warning">Aucune facture de propriété disponible pour le moment.</p>
+                    <table *ngIf="clientPropertiessServices.length > 0" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                                <th>Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let providerInvoice of clientPropertiessServices">
+                                <td>{{ providerInvoice.providerInvoiceId }}</td>
+                                <td>{{ providerInvoice.date }}</td>
+                                <td>{{ providerInvoice.status }}</td>
+                                <td>{{ providerInvoice.gain }}€</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="clientPropertiessServices.length === 0">
+                        <p class="alert alert-warning">Aucune facture de propriété disponible pour le moment.</p>
+                    </div>
                 </div>
             </div>
         </div>

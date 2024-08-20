@@ -7,7 +7,6 @@ import { PropertySingleComponent } from '../modules/properties/components/proper
 import { MyDashboardComponent } from '../modules/client-dashboard/components/my-dashboard/my-dashboard.component';
 import { ReservationListComponent } from '../modules/reservation/components/reservation-list/reservation-list.component';
 import { ProviderInvoicesListComponent } from '../modules/provider-invoices/components/provider-invoices-list/provider-invoices-list.component';
-import { ProviderInvoicesListTypeComponent } from '../modules/provider-invoices/components/provider-invoices-list-type/provider-invoices-list-type.component';
 
 const routes: Routes = [
   {
@@ -15,8 +14,7 @@ const routes: Routes = [
     children: [
       { path: "dashboard", component: MyDashboardComponent, },
       { path: "reservations", component: ReservationListComponent, },
-      { path: "providerInvoices/reservations", component: ProviderInvoicesListTypeComponent, },
-      { path: "providerInvoices/properties", component: ProviderInvoicesListTypeComponent, },
+      { path: "providerInvoices/properties", component: ProviderInvoicesListComponent, },
       { path: "properties", component: PropertiesListComponent, },
       { path: "properties/:id", component: PropertyDetailsComponent },
       { path: 'property/add', component: PropertyFormComponent },

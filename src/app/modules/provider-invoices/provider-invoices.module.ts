@@ -4,7 +4,6 @@ import { ProviderInvoicesListComponent } from './components/provider-invoices-li
 import { ProviderInvoicesSingleComponent } from './components/provider-invoices-single/provider-invoices-single.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
-import { ProviderInvoicesListTypeComponent } from './components/provider-invoices-list-type/provider-invoices-list-type.component';
 
 
 
@@ -12,7 +11,6 @@ import { ProviderInvoicesListTypeComponent } from './components/provider-invoice
   declarations: [
     ProviderInvoicesListComponent,
     ProviderInvoicesSingleComponent,
-    ProviderInvoicesListTypeComponent
   ],
   imports: [
     CommonModule,
