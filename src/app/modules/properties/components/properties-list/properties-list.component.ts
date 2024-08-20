@@ -11,15 +11,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./properties-list.component.scss']
 })
 export class PropertiesListComponent implements OnInit, OnChanges {
-  
+
   publish: boolean | null = null;
   properties: PropertyResponse[] = [];
   loading = false;
   error = false;
   startDate?: string;
   endDate?: string;
+  status?: string;
+  valid: boolean | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private propertyService: PropertyService, private customSnackBar: CustomSnackBarService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private propertyService: PropertyService, private customSnackBar: CustomSnackBarService) { }
 
   goToAddPropertyForm() {
     this.router.navigate(['client/property/add']);
@@ -28,15 +30,15 @@ export class PropertiesListComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("ngOnChanges");
   }
-  
+
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       const publishParam = params.get('publish');
       this.publish = publishParam === 'true';
       console.log(this.publish);
     });
-      const today = new Date();
-      this.startDate = today.toISOString().split('T')[0];
+    const today = new Date();
+    this.startDate = today.toISOString().split('T')[0];
     if (this.propertyService.properties.length === 0) {
       this.fetchAllProperties();
     } else {
@@ -47,7 +49,7 @@ export class PropertiesListComponent implements OnInit, OnChanges {
   fetchAllProperties() {
     this.loading = true;
     this.error = false;
-    this.propertyService.getAllProperties(this.publish).subscribe(
+    this.propertyService.getAllProperties(this.publish, this.valid).subscribe(
       (response) => {
         this.properties = response;
         this.loading = false;
@@ -71,7 +73,7 @@ export class PropertiesListComponent implements OnInit, OnChanges {
     }
     this.loading = true;
     this.error = false;
-    this.propertyService.getClientOccupiedProperties(this.startDate, this.endDate).subscribe(
+    this.propertyService.getClientOccupiedProperties(this.startDate, this.endDate, this.publish, this.valid).subscribe(
       (response) => {
         this.properties = response;
         this.loading = false;
@@ -95,7 +97,7 @@ export class PropertiesListComponent implements OnInit, OnChanges {
     }
     this.loading = true;
     this.error = false;
-    this.propertyService.getClientAvailableProperties(this.startDate, this.endDate).subscribe(
+    this.propertyService.getClientAvailableProperties(this.startDate, this.endDate, this.publish, this.valid).subscribe(
       (response) => {
         this.properties = response;
         this.loading = false;
@@ -110,6 +112,25 @@ export class PropertiesListComponent implements OnInit, OnChanges {
         this.customSnackBar.show('Erreur lors de la récupération des propriétés disponibles.', 'error', 'red');
       }
     );
+  }
+
+  filterProperties() {
+    if (this.status === "occupied") {
+      this.fetchOccupiedProperties();
+    } else if (this.status === "available") {
+      this.fetchAvailableProperties();
+    }
+    else {
+      this.fetchAllProperties();
+    }
+
+  }
+
+  clearFilter() {
+    this.startDate = undefined;
+    this.endDate = undefined;
+    this.status = undefined;
+    this.valid = null;
   }
 
   retryFetchingProperties() {

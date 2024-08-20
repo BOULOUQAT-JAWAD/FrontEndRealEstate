@@ -3,13 +3,50 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
+                <a href="#">Tableau de board</a>
             </li>
             <li class="breadcrumb-item active">Propriétés {{ publish != null && publish == true ? 'publiées' : 'non publiées' }}</li>
         </ol>
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fa fa-table"></i> Liste des Propriétés {{ publish != null && publish == true ? 'publiées' : 'non publiées' }}
+            </div>
+            <div class="box_general padding_bottom">
+                <div class="header_box version_2">
+                    <h2><i class="fa fa-filter"></i>Filtrer les propriétés : </h2>
+                </div>
+                <form (ngSubmit)="filterProperties()" class="form-inline">
+                    <div class="form-group">
+                        <label for="startDate">Du : </label>
+                        <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate"
+                            class="form-control mx-sm-2">
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="endDate">à : </label>
+                        <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate"
+                            class="form-control mx-sm-2">
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="status">Statut:</label>
+                        <select id="status" [(ngModel)]="status" name="status" class="form-control mx-sm-2">
+                            <option value="occupied">Occupées</option>
+                            <option value="available">Disponibles</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valid">Valide:</label>
+                        <select id="valid" [(ngModel)]="valid" name="status" class="form-control mx-sm-2">
+                            <option value="true">Oui</option>
+                            <option value="false">Non</option>
+                        </select>
+                    </div>
+            
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                    <button type="button" (click)="clearFilter()" class="btn btn-secondary mx-sm-2">Effacer les filtres</button>
+                </form>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -29,6 +66,7 @@
                                 <th>Status</th>
                                 <th>Prix par nuit</th>
                                 <th>Publié</th>
+                                <th>Valide</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -41,14 +79,15 @@
                                 <th>Status</th>
                                 <th>Prix par nuit</th>
                                 <th>Publié</th>
+                                <th>Valide</th>
                                 <th>Actions</th>
                             </tr>
                         </tfoot> 
                         <tbody>
                             <tr *ngFor="let property of properties">
                                 <td>
-                                    <img [src]="property.propertyImages[0].image" alt="Property Image"
-                                        style="width: 100px; height: auto;">
+                                    <img *ngIf="property.propertyImages.length > 0" [src]="property.propertyImages[0].image" alt="Property Image"
+                                        style="width: 100px; height: 70px;">
                                 </td>
                                 <td>{{ property.city }}</td>
                                 <td>{{ property.country }}</td>
@@ -56,9 +95,12 @@
                                 <td>{{ property.propertyStatus }}</td>
                                 <td>{{ property.pricePerNight }} €</td>
                                 <td>
-                                    <i [ngClass]="property.publish ? 'approved' : 'cancel'">
-                                        {{ property.publish ? 'Publié' : 'Non Publié' }}
-                                    </i>
+                                    <i [ngClass]="property.publish ? 'fa fa-check-circle approved' : 'fa fa-times-circle cancel'" 
+                                       aria-hidden="true"></i>
+                                </td>
+                                <td>
+                                    <i [ngClass]="property.valid ? 'fa fa-check-circle approved' : 'fa fa-times-circle cancel'" 
+                                       aria-hidden="true"></i>
                                 </td>
                                 <td>
                                     <app-property-single [propertyData]="property"></app-property-single>

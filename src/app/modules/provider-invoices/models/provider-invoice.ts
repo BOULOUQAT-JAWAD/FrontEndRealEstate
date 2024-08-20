@@ -16,6 +16,7 @@ export enum ServiceType {
 }
 
 export enum ProviderInvoiceStatus {
-    InProgress = 'InProgress',
-    Done = 'Done',
+    FAIT = 'FAIT',
+    EN_COURS = 'EN_COURS',
+    ANNULE = 'ANNULE',
 }

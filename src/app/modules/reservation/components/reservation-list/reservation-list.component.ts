@@ -14,6 +14,7 @@ export class ReservationListComponent implements OnInit {
   @Input() propertyId: number | undefined;
   loading = false;
   isDashBoardRoute = false;
+  isReservationListRoute = false;
   errorMessage: string | null = null;
 
   reservations: ReservationResponse[] = [];
@@ -28,11 +29,16 @@ export class ReservationListComponent implements OnInit {
   checkIfIncomeRoute(): void {
     const url = this.router.url;
     this.isDashBoardRoute = url.includes('/client/dashboard');
-    console.log("isDashBoardRoute : "+this.isDashBoardRoute);
+  }
+
+  checkIfReservationListRouteRoute(): void {
+    const url = this.router.url;
+    this.isReservationListRoute = url.includes('/client/reservations');
   }
 
   ngOnInit(): void {
     this.checkIfIncomeRoute();
+    this.checkIfReservationListRouteRoute();
     const today = new Date();
     this.checkinDate = today.toISOString().split('T')[0];
     this.getReservations();
@@ -49,17 +55,32 @@ export class ReservationListComponent implements OnInit {
     }
 
     if(this.isDashBoardRoute == false){
-      this.reservationService.getPropertyReservations(this.propertyId!, this.checkinDate, this.checkoutDate, this.status)
-        .subscribe({
-          next: (data: ReservationResponse[]) => {
-            this.reservations = data;
-          },
-          error: (err) => {
-            console.error('Error fetching reservations', err);
-            this.errorMessage = 'Erreur lors de la récupération des réservations. Veuillez réessayer plus tard.';
-          },
-        });
-        this.loading = false;
+      if(this.isReservationListRoute){
+        this.reservationService.getClientReservations(this.checkinDate, this.checkoutDate, this.status)
+          .subscribe({
+            next: (data: ReservationResponse[]) => {
+              this.reservations = data;
+            },
+            error: (err) => {
+              console.error('Error fetching reservations', err);
+              this.errorMessage = 'Erreur lors de la récupération des réservations. Veuillez réessayer plus tard.';
+            },
+          });
+          this.loading = false;
+
+      }else{
+        this.reservationService.getPropertyReservations(this.propertyId!, this.checkinDate, this.checkoutDate, this.status)
+          .subscribe({
+            next: (data: ReservationResponse[]) => {
+              this.reservations = data;
+            },
+            error: (err) => {
+              console.error('Error fetching reservations', err);
+              this.errorMessage = 'Erreur lors de la récupération des réservations. Veuillez réessayer plus tard.';
+            },
+          });
+          this.loading = false;
+      }
     }
     else{
       this.reservationService.getClientReservationsDateRange(this.checkinDate, this.checkoutDate, this.status)

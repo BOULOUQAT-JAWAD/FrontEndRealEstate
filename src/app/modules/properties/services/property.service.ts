@@ -16,39 +16,64 @@ export class PropertyService {
     private httpClient: HttpClient
   ) { }
 
-  public getAllProperties(publish: boolean | null): Observable<PropertyResponse[]> {
+  public getAllProperties(publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
-      console.log('publish : '+publish)
-      let params = new HttpParams();
+    console.log('publish : '+publish)
+    let params = new HttpParams();
+
     if (publish != null) {
-      console.log('HEELlO')
       params = params
         .set('publish', publish);
+    }
+
+    if (valid != null) {
+      params = params
+        .set('valid', valid);
     }
 
     return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties`, { headers, params });
   }
 
-  public getClientOccupiedProperties(startDate: string, endDate: string): Observable<PropertyResponse[]> {
+  public getClientOccupiedProperties(startDate: string, endDate: string, publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
 
     let params = new HttpParams()
       .set('startDate', startDate)
       .set('endDate', endDate);
+
+      if (publish != null) {
+        params = params
+          .set('publish', publish);
+      }
+      
+      if (valid != null) {
+        params = params
+          .set('valid', valid);
+      }
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
     return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/occupied`, { headers, params });
   }
 
-  public getClientAvailableProperties(startDate: string, endDate: string): Observable<PropertyResponse[]> {
+  public getClientAvailableProperties(startDate: string, endDate: string, publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
 
     let params = new HttpParams()
       .set('startDate', startDate)
       .set('endDate', endDate);
+
+    if (publish != null) {
+      params = params
+        .set('publish', publish);
+    }
+
+    if (valid != null) {
+      params = params
+        .set('valid', valid);
+    }
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 

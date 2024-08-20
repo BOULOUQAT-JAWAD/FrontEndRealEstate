@@ -11,25 +11,25 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./provider-invoices-list.component.scss']
 })
 export class ProviderInvoicesListComponent implements OnInit, OnChanges {
-  
-  startDate!: string;
-  endDate!: string;
+
+  startDate: string | undefined;
+  endDate: string | undefined;
 
   clientReservationsServices: ProviderInvoice[] = [];
   clientPropertiessServices: ProviderInvoice[] = [];
 
   loadingReservation = false;
   loadingProperty = false;
-  
+
   errorReservation = false;
   errorProperty = false;
 
-  constructor(private router: Router, private providerInvoiceService: ProviderInvoiceService, private customSnackBar: CustomSnackBarService) {}
+  constructor(private router: Router, private providerInvoiceService: ProviderInvoiceService, private customSnackBar: CustomSnackBarService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("ngOnChanges");
   }
-  
+
   ngOnInit(): void {
     const today = new Date();
     const nextDate = new Date();
@@ -42,14 +42,34 @@ export class ProviderInvoicesListComponent implements OnInit, OnChanges {
   }
 
   fetchInvoices(): void {
-    this.fetchReservationsInvoices();
-    this.fetchPropertiesInvoices();
+    if (this.validateDates()) {
+      this.fetchReservationsInvoices();
+      this.fetchPropertiesInvoices();
+    }
+  }
+
+  validateDates(): boolean {
+    if (!this.startDate || !this.endDate) {
+      this.errorProperty = true;
+      this.errorReservation = true;
+      this.customSnackBar.show('Veuillez sélectionner les deux dates.', 'warning', 'yellow');
+      return false;
+    }
+
+    if (new Date(this.endDate) < new Date(this.startDate)) {
+      this.errorProperty = true;
+      this.errorReservation = true;
+      this.customSnackBar.show('La date de fin doit être postérieure à la date de début.', 'warning', 'yellow');
+      return false;
+    }
+
+    return true;
   }
 
   fetchReservationsInvoices() {
     this.loadingReservation = true;
     this.errorReservation = false;
-    this.providerInvoiceService.getClientReservationsServices(this.startDate, this.endDate).subscribe(
+    this.providerInvoiceService.getClientReservationsServices(this.startDate, this.endDate, null).subscribe(
       (response) => {
         this.clientReservationsServices = response;
         this.loadingReservation = false;
@@ -69,7 +89,7 @@ export class ProviderInvoicesListComponent implements OnInit, OnChanges {
   fetchPropertiesInvoices() {
     this.loadingProperty = true;
     this.errorProperty = false;
-    this.providerInvoiceService.getClientPropertiesServices(this.startDate, this.endDate).subscribe(
+    this.providerInvoiceService.getClientPropertiesServices(this.startDate, this.endDate, null).subscribe(
       (response) => {
         this.clientPropertiessServices = response;
         this.loadingProperty = false;

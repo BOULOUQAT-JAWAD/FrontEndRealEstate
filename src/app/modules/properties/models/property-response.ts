@@ -17,6 +17,7 @@ export interface PropertyResponse {
     occupiedTo: Date;
     pricePerNight: number;
     publish: boolean;
+    valid: boolean;
     propertyImages: PropertyImage[];
     pjServices: PjService[];
 }
