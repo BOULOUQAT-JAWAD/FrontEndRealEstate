@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environment/environment";
 import { PropertyResponse } from '../models/property-response';
 import { Observable } from 'rxjs';
+import { PropertyRequest } from '../models/property-request';
 
 @Injectable({
   providedIn: 'root'
@@ -87,7 +88,7 @@ export class PropertyService {
     return this.httpClient.get<PropertyResponse>(`${environment.baseUrl}properties/${id}`, { headers });
   }
 
-  public saveOrUpdateProperty(request: FormData): Observable<PropertyResponse> {
+  public saveOrUpdateProperty(request: PropertyRequest): Observable<PropertyResponse> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 

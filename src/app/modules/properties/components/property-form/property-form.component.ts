@@ -6,8 +6,9 @@ import { PropertyRequest } from '../../models/property-request';
 import { PropertyType } from '../../models/property-type';
 import { PropertyStatus } from '../../models/property-status';
 import { PropertyResponse } from '../../models/property-response';
-import { PjServicesService } from 'src/app/modules/pj-services/services/pj-services.service';
-import { PjService } from 'src/app/modules/pj-services/models/pj-service';
+import { ImageService } from 'src/app/core/services/image.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class PropertyFormComponent implements OnInit {
   propertyForm!: FormGroup;
   propertyId?: number;
   selectedFiles: File[] = [];  
+  propertyImages: string[] = [];
   // selectedPjServices: PjService[] = [];
 
   propertyTypes = Object.values(PropertyType);
@@ -29,14 +31,16 @@ export class PropertyFormComponent implements OnInit {
     private propertyService: PropertyService,
     private route: ActivatedRoute,
     private router: Router,
+    private imageService: ImageService,
+    public dialog: MatDialog   
     // private pjServicesService: PjServicesService,
   ) { }
 
-  onFileChange(event: any): void {
-    if (event.target.files) {
-      this.selectedFiles = Array.from(event.target.files);
-    }
-  }
+  // onFileChange(event: any): void {
+  //   if (event.target.files) {
+  //     this.selectedFiles = Array.from(event.target.files);
+  //   }
+  // }
 
   // onServiceChange(event: any, service: PjService): void {
   //   let selectedServices:number[] = this.propertyForm.value.pjServices || [];
@@ -60,7 +64,10 @@ export class PropertyFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.checkEditMode();
+  }
 
+  checkEditMode(): void {
     const currentRoute = this.route.snapshot.routeConfig?.path;
     console.log('currentRoute : ' + currentRoute);
 
@@ -98,6 +105,7 @@ export class PropertyFormComponent implements OnInit {
       occupiedTo: [null],
       pricePerNight: [0, [Validators.required, Validators.min(0)]],
       publish: [false],
+      propertyImages: []
       // pjServices: [[]], 
     });
   }
@@ -118,16 +126,63 @@ export class PropertyFormComponent implements OnInit {
         occupiedTo: property.occupiedTo,
         pricePerNight: property.pricePerNight,
         publish: property.publish,
+        propertyImages: property.propertyImages,
         // pjServices : property.pjServices.map(service => service.pjServiceId) 
       });
+
+      // Store the images in a local variable for further use if needed
+      this.propertyImages = property.propertyImages || [];
     });
+  }
+
+  onFileChange(event: any): void {
+    if (event.target.files) {
+      this.selectedFiles = Array.from(event.target.files);
+      this.uploadImages();
+    }
+  }
+
+  uploadImages(): void {
+    if (this.selectedFiles.length === 0) {
+      return;
+    }
+
+    const formData = new FormData();
+    this.selectedFiles.forEach((file) => {
+      formData.append('images', file, file.name);
+    });
+
+    this.imageService.uploadImages(formData).subscribe((urls: string[]) => {
+      this.propertyImages.push(...urls);
+      this.propertyForm.patchValue({ propertyImages: this.propertyImages });
+    });
+  }
+
+  onDeleteImage(index: number): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirmation de suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer cette image ?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.removeImage(index);
+      }
+    });
+  }
+  
+  removeImage(index: number): void {
+    this.propertyImages.splice(index, 1);
+    this.propertyForm.patchValue({ propertyImages: this.propertyImages });
   }
 
   onSubmit(): void {
     if (this.propertyForm.valid) {
 
-      const selectedServiceIds: number[] = this.propertyForm.value.pjServices || [];
-      const selectedServices: { pjServiceId: number }[] = selectedServiceIds.map(id => ({ pjServiceId: id }));
+      // const selectedServiceIds: number[] = this.propertyForm.value.pjServices || [];
+      // const selectedServices: { pjServiceId: number }[] = selectedServiceIds.map(id => ({ pjServiceId: id }));
 
       // this.propertyForm.patchValue({
       //   pjServices: selectedServices
@@ -135,27 +190,27 @@ export class PropertyFormComponent implements OnInit {
   
       const property: PropertyRequest = this.propertyForm.value;
 
-      const formData: FormData = new FormData();
-      formData.append('property', new Blob([JSON.stringify(property)], {
-        type: 'application/json'
-      }));
+      // const formData: FormData = new FormData();
+      // formData.append('property', new Blob([JSON.stringify(property)], {
+      //   type: 'application/json'
+      // }));
 
-      console.log("property  :  "+JSON.stringify(property));
+      // console.log("property  :  "+JSON.stringify(property));
       
-      this.selectedFiles.forEach((file, index) => {
-        formData.append('images', file, file.name);
-      });
+      // this.selectedFiles.forEach((file, index) => {
+      //   formData.append('images', file, file.name);
+      // });
   
       if (this.propertyId) {
         property.propertyId = this.propertyId;
-        this.propertyService.saveOrUpdateProperty(formData).subscribe(response => {
+        this.propertyService.saveOrUpdateProperty(property).subscribe(response => {
           console.log('Property updated:', response);
           this.router.navigate(['/client/properties']);
         }, error => {
           console.error('Error updating property:', error);
         });
       } else {
-        this.propertyService.saveOrUpdateProperty(formData).subscribe(response => {
+        this.propertyService.saveOrUpdateProperty(property).subscribe(response => {
           console.log('Property created:', response);
           this.router.navigate(['/client/properties']);
         }, error => {

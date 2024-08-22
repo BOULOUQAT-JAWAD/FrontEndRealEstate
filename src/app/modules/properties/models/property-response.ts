@@ -1,5 +1,3 @@
-import { PjService } from "../../pj-services/models/pj-service";
-import { PropertyImage } from "./property-image";
 import { PropertyStatus } from "./property-status";
 import { PropertyType } from "./property-type";
 
@@ -18,6 +16,5 @@ export interface PropertyResponse {
     pricePerNight: number;
     publish: boolean;
     valid: boolean;
-    propertyImages: PropertyImage[];
-    pjServices: PjService[];
+    propertyImages: string[];
 }

@@ -12,43 +12,30 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box_general padding_bottom">
-                    <div class="list_general">
-                        <ul>
-                            <li>
-                                <figure>
-                                    <img *ngIf="propertyData.propertyImages.length > 0"
-                                        [src]="propertyData.propertyImages[0].image" alt="Property Image"
-                                        class="img-fluid">
-                                </figure>
-                                <h4>{{ propertyData.city }}, {{ propertyData.country }} <h4>
-                                        <i [ngClass]="{
-                                            'approved': propertyData.propertyStatus === 'Propre',
-                                            'pending': propertyData.propertyStatus === 'Sale'
-                                        }">
-                                            {{ propertyData.propertyStatus }}
-                                        </i>
-                                    </h4>
-                                </h4>
-                                <ul class="booking_list">
-                                    <li><strong>Type de Propriété:</strong> {{ propertyData.propertyType }}</li>
-                                    <li><strong>Nombre de Chambres:</strong> {{ propertyData.numberOfRooms }} chambres
-                                    </li>
-                                    <li><strong>Surface:</strong> {{ propertyData.surface }} m²</li>
-                                    <li><strong>Prix par Nuit:</strong> {{ propertyData.pricePerNight }}€</li>
-                                </ul>
-                            </li>
+                    <div class="property-carousel">
+                        <div class="carousel-wrapper">
+                            <button class="carousel-control prev" (click)="prevImage()">&#10094;</button>
+                            <img [src]="propertyData.propertyImages[currentIndex]" alt="Property Image" class="carousel-image img-fluid">
+                            <button class="carousel-control next" (click)="nextImage()">&#10095;</button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <h2 class="property-title">{{ propertyData.city }}, {{ propertyData.country }}</h2>
+                        <span class="property-status" [ngClass]="{
+                            'badge-success': propertyData.propertyStatus === 'Propre',
+                            'badge-warning': propertyData.propertyStatus === 'Sale'
+                        }">
+                            {{ propertyData.propertyStatus }}
+                        </span>
+                        <ul class="property-info list-unstyled">
+                            <li><strong>Type de Propriété:</strong> {{ propertyData.propertyType }}</li>
+                            <li><strong>Nombre de Chambres:</strong> {{ propertyData.numberOfRooms }} chambres</li>
+                            <li><strong>Surface:</strong> {{ propertyData.surface }} m²</li>
+                            <li><strong>Prix par Nuit:</strong> {{ propertyData.pricePerNight }}€</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-md-6">
-                <div class="box_general padding_bottom">
-                    <div class="header_box version_2">
-                        <h2><i class="fa fa-cogs"></i>Services</h2>
-                    </div>
-                    <app-pj-services-list [pjServices]="propertyData.pjServices"></app-pj-services-list>
-                </div>
-            </div> -->
         </div>
 
         <div class="box_general padding_bottom">

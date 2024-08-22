@@ -6,7 +6,8 @@
             <li class="breadcrumb-item">
                 <a href="#">Tableau de bord</a>
             </li>
-            <li class="breadcrumb-item active">{{ propertyId ? 'Mettre à jour la propriété' : 'Créer une propriété' }}</li>
+            <li class="breadcrumb-item active">{{ propertyId ? 'Mettre à jour la propriété' : 'Créer une propriété' }}
+            </li>
         </ol>
 
         <div class="box_general padding_bottom">
@@ -18,8 +19,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Description</label>
-                            <input id="description" formControlName="description" type="text" class="form-control" placeholder="Entrez la description">
-                            <div *ngIf="propertyForm.get('description')?.invalid && propertyForm.get('description')?.touched" class="error">
+                            <input id="description" formControlName="description" type="text" class="form-control"
+                                placeholder="Entrez la description">
+                            <div *ngIf="propertyForm.get('description')?.invalid && propertyForm.get('description')?.touched"
+                                class="error">
                                 La description est requise.
                             </div>
                         </div>
@@ -27,8 +30,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Pays</label>
-                            <input id="country" formControlName="country" type="text" class="form-control" placeholder="Entrez le pays">
-                            <div *ngIf="propertyForm.get('country')?.invalid && propertyForm.get('country')?.touched" class="error">
+                            <input id="country" formControlName="country" type="text" class="form-control"
+                                placeholder="Entrez le pays">
+                            <div *ngIf="propertyForm.get('country')?.invalid && propertyForm.get('country')?.touched"
+                                class="error">
                                 Le pays est requis.
                             </div>
                         </div>
@@ -39,8 +44,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Ville</label>
-                            <input id="city" formControlName="city" type="text" class="form-control" placeholder="Entrez la ville">
-                            <div *ngIf="propertyForm.get('city')?.invalid && propertyForm.get('city')?.touched" class="error">
+                            <input id="city" formControlName="city" type="text" class="form-control"
+                                placeholder="Entrez la ville">
+                            <div *ngIf="propertyForm.get('city')?.invalid && propertyForm.get('city')?.touched"
+                                class="error">
                                 La ville est requise.
                             </div>
                         </div>
@@ -52,7 +59,8 @@
                                 <select id="propertyType" formControlName="propertyType" class="form-control">
                                     <option *ngFor="let type of propertyTypes" [value]="type">{{ type }}</option>
                                 </select>
-                                <div *ngIf="propertyForm.get('propertyType')?.invalid && propertyForm.get('propertyType')?.touched" class="error">
+                                <div *ngIf="propertyForm.get('propertyType')?.invalid && propertyForm.get('propertyType')?.touched"
+                                    class="error">
                                     Le type de propriété est requis.
                                 </div>
                             </div>
@@ -66,9 +74,11 @@
                             <label>Status de la Propriété</label>
                             <div class="styled-select">
                                 <select id="propertyStatus" formControlName="propertyStatus" class="form-control">
-                                    <option *ngFor="let status of propertyStatuses" [value]="status">{{ status }}</option>
+                                    <option *ngFor="let status of propertyStatuses" [value]="status">{{ status }}
+                                    </option>
                                 </select>
-                                <div *ngIf="propertyForm.get('propertyStatus')?.invalid && propertyForm.get('propertyStatus')?.touched" class="error">
+                                <div *ngIf="propertyForm.get('propertyStatus')?.invalid && propertyForm.get('propertyStatus')?.touched"
+                                    class="error">
                                     Le statut de la propriété est requis.
                                 </div>
                             </div>
@@ -77,8 +87,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Nombre de Chambres</label>
-                            <input type="number" id="numberOfRooms" formControlName="numberOfRooms" class="form-control">
-                            <div *ngIf="propertyForm.get('numberOfRooms')?.invalid && propertyForm.get('numberOfRooms')?.touched" class="error">
+                            <input type="number" id="numberOfRooms" formControlName="numberOfRooms"
+                                class="form-control">
+                            <div *ngIf="propertyForm.get('numberOfRooms')?.invalid && propertyForm.get('numberOfRooms')?.touched"
+                                class="error">
                                 Le nombre de chambres doit être au moins 1.
                             </div>
                         </div>
@@ -89,8 +101,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Nombre de Personnes</label>
-                            <input type="number" id="numberOfPersons" formControlName="numberOfPersons" class="form-control">
-                            <div *ngIf="propertyForm.get('numberOfPersons')?.invalid && propertyForm.get('numberOfPersons')?.touched" class="error">
+                            <input type="number" id="numberOfPersons" formControlName="numberOfPersons"
+                                class="form-control">
+                            <div *ngIf="propertyForm.get('numberOfPersons')?.invalid && propertyForm.get('numberOfPersons')?.touched"
+                                class="error">
                                 Le nombre de personnes doit être au moins 1.
                             </div>
                         </div>
@@ -99,7 +113,8 @@
                         <div class="form-group">
                             <label>Surface (en m²)</label>
                             <input type="number" id="surface" formControlName="surface" class="form-control">
-                            <div *ngIf="propertyForm.get('surface')?.invalid && propertyForm.get('surface')?.touched" class="error">
+                            <div *ngIf="propertyForm.get('surface')?.invalid && propertyForm.get('surface')?.touched"
+                                class="error">
                                 La surface doit être d'au moins 1 m².
                             </div>
                         </div>
@@ -110,8 +125,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Prix par Nuit (€)</label>
-                            <input type="number" id="pricePerNight" formControlName="pricePerNight" class="form-control">
-                            <div *ngIf="propertyForm.get('pricePerNight')?.invalid && propertyForm.get('pricePerNight')?.touched" class="error">
+                            <input type="number" id="pricePerNight" formControlName="pricePerNight"
+                                class="form-control">
+                            <div *ngIf="propertyForm.get('pricePerNight')?.invalid && propertyForm.get('pricePerNight')?.touched"
+                                class="error">
                                 Le prix par nuit doit être au moins 0.
                             </div>
                         </div>
@@ -129,14 +146,56 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Télécharger des Images</label>
                             <input type="file" id="images" (change)="onFileChange($event)" accept="image/*" multiple class="form-control">
                         </div>
                     </div>
+                </div> -->
+
+                <!-- Image management section -->
+
+                <!-- <div class="form-group">
+                    <label>Images actuelles</label>
+                    <div class="image-list">
+                        <div *ngFor="let image of propertyForm.value.propertyImages; let i = index" class="image-item row align-items-center">
+                            <div class="col-md-8">
+                                <img [src]="image" alt="Image de la propriété" style="height: 100px; width: 100px;" class="img-thumbnail property-image">
+                            </div>
+                            <div class="col-md-4">
+                                <button mat-icon-button color="warn" (click)="onDeleteImage(i)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label>Images actuelles</label>
+                    <div class="image-list">
+                        <div *ngFor="let image of propertyForm.value.propertyImages; let i = index"
+                            class="image-item row align-items-center">
+                            <div class="image-container">
+                                <img [src]="image" alt="Image de la propriété" style="height: 100px; width: 100px;" class="img-thumbnail">
+                            </div>
+                            <div>
+                                <button mat-icon-button color="warn" type="button" class="btn btn-danger btn-sm delete-btn"
+                                    (click)="onDeleteImage(i)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <label>Ajouter des images</label>
+                    <input type="file" id="images" (change)="onFileChange($event)" accept="image/*" multiple
+                        class="form-control">
+                </div>
+
                 <!-- /row-->
                 <!-- <div class="row">
                     <div class="col-md-12">
@@ -155,7 +214,8 @@
                     </div>
                 </div> -->
                 <!-- /row-->
-                <button type="submit" class="btn_1 medium">{{ propertyId ? 'Mettre à jour la propriété' : 'Créer la propriété' }}</button>
+                <button type="submit" class="btn_1 medium">{{ propertyId ? 'Mettre à jour la propriété' : 'Créer la
+                    propriété' }}</button>
             </form>
         </div>
         <!-- /box_general-->

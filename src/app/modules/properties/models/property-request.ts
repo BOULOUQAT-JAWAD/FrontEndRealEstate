@@ -12,5 +12,5 @@ export interface PropertyRequest {
     surface: number;
     pricePerNight: number;
     publish: boolean;
-    pjServices: PjService[]
+    propertyImages: String[];
   }

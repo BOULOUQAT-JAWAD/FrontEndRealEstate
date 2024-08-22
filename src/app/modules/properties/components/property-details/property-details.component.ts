@@ -16,7 +16,16 @@ export class PropertyDetailsComponent implements OnInit {
   private propertyId: number | null;
   propertyData!: PropertyResponse;
   propertyFetched!: boolean;
+  currentIndex = 0;
 
+  nextImage() {
+    this.currentIndex = (this.currentIndex + 1) % this.propertyData.propertyImages.length;
+  }
+
+  prevImage() {
+    this.currentIndex = (this.currentIndex - 1 + this.propertyData.propertyImages.length) % this.propertyData.propertyImages.length;
+  }
+  
   constructor(private activeRoute: ActivatedRoute, private propertyService: PropertyService, private customSnackBar: CustomSnackBarService,
 
     private location: Location,

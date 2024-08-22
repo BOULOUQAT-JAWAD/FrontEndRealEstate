@@ -86,7 +86,7 @@
                         <tbody>
                             <tr *ngFor="let property of properties">
                                 <td>
-                                    <img *ngIf="property.propertyImages.length > 0" [src]="property.propertyImages[0].image" alt="Property Image"
+                                    <img *ngIf="property.propertyImages != null && property.propertyImages.length > 0" [src]="property.propertyImages[0]" alt="Property Image"
                                         style="width: 100px; height: 70px;">
                                 </td>
                                 <td>{{ property.city }}</td>
