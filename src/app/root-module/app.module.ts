@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './root-component/app.component';
+import {AuthModule} from "../modules/auth/auth.module";
 import { PropertiesModule } from '../modules/properties/properties.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +18,9 @@ import { ClientDashboardModule } from '../modules/client-dashboard/client-dashbo
   ],
   imports: [
     BrowserModule,
+    AuthModule,
     AppRoutingModule,
+    HttpClientModule,
     PropertiesModule,
     HttpClientModule,
     BrowserAnimationsModule,

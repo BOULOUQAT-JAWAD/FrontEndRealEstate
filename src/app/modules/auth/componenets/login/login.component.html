@@ -1,0 +1,46 @@
+<div class="parent-con">
+
+  <div class="mycontainer"  >
+    <div class="mycontainer-header">
+      Login
+    </div>
+    <div class="mycontainer-content">
+      <form [formGroup]="formGroup" (ngSubmit)="loginUser()">
+        <table>
+          <tr>
+            <td>Email</td>
+            <!--         -->
+            <td><input [formControlName]="'email'" type="text"  [ngClass]="{'error-input-board' : !formGroup.get('email')?.valid && formGroup.get('email')?.touched}">
+              <p *ngIf="!formGroup.get('email')?.valid && formGroup.get('email')?.touched"
+                 class="error-msg">
+                Can you please enter a valid email
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <!--         -->
+            <td><input type="password" [formControlName]="'password'"  [ngClass]="{'error-input-board' : !formGroup.get('password')?.valid && formGroup.get('password')?.touched}">
+              <p *ngIf="!formGroup.get('password')?.valid && formGroup.get('password')?.touched"
+                 class="error-msg">
+                Can you please enter a valid password
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><p><button [disabled]="!formGroup.valid"   class="mycontainer-content-signup">
+              <div *ngIf="!isloading">Log In</div>
+              <i *ngIf="isloading" class="fa-solid fa-spinner fa-spin"></i>
+            </button>
+              Dont have an account? <a routerLink="/signup">SIGN UP</a></p></td>
+          </tr>
+        </table>
+        <div *ngIf="isLoginError" class="login-error shake-horizontal">
+          <p> Login Failed. Please check your credentials and try again.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

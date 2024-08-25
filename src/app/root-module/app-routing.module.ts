@@ -7,8 +7,15 @@ import { PropertySingleComponent } from '../modules/properties/components/proper
 import { MyDashboardComponent } from '../modules/client-dashboard/components/my-dashboard/my-dashboard.component';
 import { ReservationListComponent } from '../modules/reservation/components/reservation-list/reservation-list.component';
 import { ProviderInvoicesListComponent } from '../modules/provider-invoices/components/provider-invoices-list/provider-invoices-list.component';
+import {SignupComponent} from "../modules/auth/componenets/signup/signup.component";
+import {LoginComponent} from "../modules/auth/componenets/login/login.component";
+import {ActivateGuard} from "../modules/auth/guard/activation.guard";
+
 
 const routes: Routes = [
+  {path:"signup", component:SignupComponent},
+  {path:"login", component:LoginComponent},
+  {path:"activate", canActivate:[ActivateGuard],component:LoginComponent},
   {
     path: "client",
     children: [
