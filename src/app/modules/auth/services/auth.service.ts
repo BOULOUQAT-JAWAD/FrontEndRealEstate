@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {map, Subject} from "rxjs";
+import {map, Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {SignupRequest} from "../models/signup.request";
 import {environment} from "../../../environment/environment";
@@ -11,6 +11,16 @@ import {LoginResponse} from "../models/login.response";
   providedIn: 'root'
 })
 export class AuthService {
+  saveUserInfoInLocalStorage(response: LoginResponse) {
+    this.localStorage.store('token', response.token);
+    this.localStorage.store('id', response.userId);
+  
+  }
+  
+  
+  activateUser(token: string): Observable<LoginResponse> {
+    return this.http.get<LoginResponse>(`${environment.baseUrl}auth/activate/${token}`);
+  }
 
   isLoggedId:boolean=false;
   loginStatusChanged = new Subject<boolean>();
@@ -28,16 +38,16 @@ export class AuthService {
     return  this.http.post<LoginResponse>(environment.baseUrl+"auth/login",loginForm).pipe(
       map(
         (data:LoginResponse)=>{
-          if (data.role=='admin' || data.role=='delivery'){
-            this.localStorage.store("adminRole",data.role)
-            return false;
-          }
-          else {
-            this.localStorage.store('authenticationToken', data.authenticationToken);
-            this.localStorage.store('username', data.username);
-            this.localStorage.store('expiresAt', data.expiresAt);
+          // if (data.role=='admin' || data.role=='delivery'){
+          //   this.localStorage.store("adminRole",data.role)
+          //   return false;
+          // }
+          // else {
+            console.log("should work")
+            this.localStorage.store('token', data.token);
+            this.localStorage.store('id', data.userId);
             return  true;
-          }
+          // }
 
         }
       )
@@ -50,7 +60,7 @@ export class AuthService {
     return (this.getJwt()!=null)
   }
   getJwt() {
-    return this.localStorage.retrieve("authenticationToken")
+    return this.localStorage.retrieve("token")
   }
 
   logout() {

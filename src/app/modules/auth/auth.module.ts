@@ -4,13 +4,16 @@ import { SignupComponent } from './componenets/signup/signup.component';
 import { LoginComponent } from './componenets/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
+import {LocalStorageService} from "ngx-webstorage";
+import { ActivationComponent } from './componenets/activation/activation.component';
 
 
 
 @NgModule({
   declarations: [
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ActivationComponent
   ],
   exports: [
     SignupComponent,
@@ -22,6 +25,9 @@ import {RouterLink} from "@angular/router";
     NgIf,
     ReactiveFormsModule,
     RouterLink
+  ],
+  providers : [
+    LocalStorageService
   ]
 })
 export class AuthModule { }

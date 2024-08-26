@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from '../core/core.module';
 import { ProviderInvoicesModule } from '../modules/provider-invoices/provider-invoices.module';
 import { ClientDashboardModule } from '../modules/client-dashboard/client-dashboard.module';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -24,10 +25,12 @@ import { ClientDashboardModule } from '../modules/client-dashboard/client-dashbo
     PropertiesModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     CoreModule,
     ProviderInvoicesModule,
-    ClientDashboardModule
+    ClientDashboardModule,
+    NgxWebstorageModule.forRoot(),
+    ToastrModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]

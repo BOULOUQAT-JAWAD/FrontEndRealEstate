@@ -3,17 +3,18 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit{
+export class  SignupComponent implements OnInit{
   signupForm!: FormGroup;
 
   constructor(private authService: AuthService,
-              private router:Router) {
+              private router:Router,private toastr:ToastrService) {
 
   }
 
@@ -38,6 +39,7 @@ export class SignupComponent implements OnInit{
           this.router.navigate(["/login"],{queryParams:{registered:true}})
         },
         error => {
+          this.toastr.error("Something went wrong! Please try again")
 
         }
       )

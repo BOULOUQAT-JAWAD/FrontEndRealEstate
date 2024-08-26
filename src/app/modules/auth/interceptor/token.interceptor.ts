@@ -19,9 +19,8 @@ export class TokenInterceptor implements HttpInterceptor {
               private localStorage:LocalStorageService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (request.url.includes('products') || request.url.includes('login') ||
-      request.url.includes('signup') || request.url.includes('command/all')
-      || request.url.includes('command/status') || request.url.includes('admin')    ) {
+    if (request.url.includes('login') ||
+      request.url.includes('signup')   ) {
       return next.handle(request);
     }
 

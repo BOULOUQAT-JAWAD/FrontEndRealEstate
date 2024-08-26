@@ -10,12 +10,13 @@ import { ProviderInvoicesListComponent } from '../modules/provider-invoices/comp
 import {SignupComponent} from "../modules/auth/componenets/signup/signup.component";
 import {LoginComponent} from "../modules/auth/componenets/login/login.component";
 import {ActivateGuard} from "../modules/auth/guard/activation.guard";
+import { ActivationComponent } from '../modules/auth/componenets/activation/activation.component';
 
 
 const routes: Routes = [
   {path:"signup", component:SignupComponent},
   {path:"login", component:LoginComponent},
-  {path:"activate", canActivate:[ActivateGuard],component:LoginComponent},
+  { path: 'activate', component: ActivationComponent },
   {
     path: "client",
     children: [
