@@ -4,6 +4,7 @@ import { environment } from "../../../environment/environment";
 import { PropertyResponse } from '../models/property-response';
 import { Observable } from 'rxjs';
 import { PropertyRequest } from '../models/property-request';
+import { PropertyType } from '../models/property-type';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,11 @@ export class PropertyService {
     private httpClient: HttpClient
   ) { }
 
-  public getAllProperties(publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
+  public getClientProperties(publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
-    console.log('publish : '+publish)
+    console.log('publish : ' + publish)
     let params = new HttpParams();
 
     if (publish != null) {
@@ -44,15 +45,15 @@ export class PropertyService {
       .set('startDate', startDate)
       .set('endDate', endDate);
 
-      if (publish != null) {
-        params = params
-          .set('publish', publish);
-      }
-      
-      if (valid != null) {
-        params = params
-          .set('valid', valid);
-      }
+    if (publish != null) {
+      params = params
+        .set('publish', publish);
+    }
+
+    if (valid != null) {
+      params = params
+        .set('valid', valid);
+    }
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
 
@@ -102,4 +103,40 @@ export class PropertyService {
     return this.httpClient.delete<PropertyResponse>(`${environment.baseUrl}properties/${id}`, { headers });
   }
 
+  public getAllProperties(description?: string, country?: string, city?: string, propertyType?: PropertyType, checkinDate?: string, checkoutDate?: string): Observable<PropertyResponse[]> {
+
+    let params = new HttpParams();
+
+    if (description != null) {
+      params = params
+        .set('description', description);
+    }
+
+    if (city != null) {
+      params = params
+        .set('city', city);
+    }
+
+    if (country != null) {
+      params = params
+        .set('country', country);
+    }
+
+    if (propertyType != null) {
+      params = params
+        .set('propertyType', propertyType);
+    }
+
+    if (checkinDate != null) {
+      params = params
+        .set('checkinDate', checkinDate);
+    }
+
+    if (checkoutDate != null) {
+      params = params
+        .set('checkoutDate', checkoutDate);
+    }
+
+    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/getAll`, { params });
+  }
 }
