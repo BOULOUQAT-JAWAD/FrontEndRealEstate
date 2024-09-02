@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './root-component/app.component';
 import {AuthModule} from "../modules/auth/auth.module";
 import { PropertiesModule } from '../modules/properties/properties.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from '../core/core.module';
 import { ProviderInvoicesModule } from '../modules/provider-invoices/provider-invoices.module';
 import { ClientDashboardModule } from '../modules/client-dashboard/client-dashboard.module';
 import { TravelerModule } from '../modules/traveler/traveler.module';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { TokenInterceptor } from '../modules/auth/interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,13 +27,17 @@ import { TravelerModule } from '../modules/traveler/traveler.module';
     PropertiesModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     CoreModule,
     ProviderInvoicesModule,
     ClientDashboardModule,
-    TravelerModule
+    TravelerModule,
+    NgxWebstorageModule.forRoot(),
+    ToastrModule.forRoot()
+
   ],
-  providers: [],
+  providers: [
+//    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

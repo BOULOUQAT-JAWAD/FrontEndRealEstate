@@ -1,6 +1,8 @@
 export interface LoginResponse {
-  expiresAt: string;
-  username: string;
-  authenticationToken: string;
-  role:string
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  userId: string;
+  token: string;
 }

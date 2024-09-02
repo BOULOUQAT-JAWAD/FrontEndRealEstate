@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginRequest} from "../../models/login.request";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   formGroup!:FormGroup;
 
   loginReq!:LoginRequest;
@@ -19,14 +21,9 @@ export class LoginComponent {
   isLoginError!:boolean;
 
   constructor( private activeRoute:ActivatedRoute
-    , private router:Router,private authService:AuthService,) {
+    , private router:Router,private authService:AuthService,private toastr:ToastrService) {
   }
 
-  // constructor(private loginService:RegistrationService,
-  //             private toastr:ToastrService,
-  //             private activeRoute:ActivatedRoute,
-  //             private router:Router) {
-  // }
   ngOnInit(): void {
     this.formGroup = new FormGroup<any>(
       {
@@ -37,7 +34,8 @@ export class LoginComponent {
     this.activeRoute.queryParamMap.subscribe(
       (params)=>{
         if (params.get("registered") == 'true'){
-          console.log("Please Check your inbox for activation email activate your account before you Login!"
+          console.log("coco")
+          this.toastr.success("Please Check your inbox for activation email activate your account before you Login!"
             ,"Sign Up Successful")
         }
       }
@@ -45,16 +43,16 @@ export class LoginComponent {
     this.activeRoute.queryParamMap.subscribe(
       (params)=>{
         if (params.get("loggedin") == 'false'){
-          console.log("Please Log in first")
+          this.toastr.info("Please Log in first")
         }
       }
     );
-    // if (this.authService.islogedin()){
-    //   this.router.navigate(["/"]).then(
-    //     ()=>{
-    //       window.location.reload()
-    //     }
-    //   )    }
+    if (this.authService.islogedin()){
+      this.router.navigate(["/"]).then(
+        ()=>{
+          window.location.reload()
+        }
+      )    }
 
   }
 
@@ -73,7 +71,7 @@ export class LoginComponent {
 
         this.isloading=false
         if (response){
-          this.router.navigate(["/"]).then(
+          this.router.navigate(["/client/dashboard"]).then(
             ()=>{
               window.location.reload()
             }
@@ -90,8 +88,8 @@ export class LoginComponent {
       ,
       error => {
         this.isloading=false
-        console.log(error)
-        //this.toastr.error("the email or the password you entered are not correct!")
+        console.log("error")
+        this.toastr.error("the email or the password you entered are not correct!")
       }
     )
     // this.loginService.login(this.loginReq).subscribe(

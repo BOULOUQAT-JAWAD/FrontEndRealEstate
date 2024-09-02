@@ -1,60 +1,82 @@
-<div class="signup-container">
-  <h2>Signup</h2>
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" formControlName="firstName" placeholder="Enter your first name">
-      <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
-        First name is required.
-      </div>
-    </div>
+<div id="register_bg">
+  <nav id="menu" class="fake_menu"></nav>
 
-    <div>
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" formControlName="lastName" placeholder="Enter your last name">
-      <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
-        Last name is required.
-      </div>
-    </div>
+  <!-- <div id="preloader">
+    <div data-loader="circle-side"></div>
+  </div> -->
+  <!-- End Preload -->
 
-    <div>
-      <label for="phoneNumber">Phone Number</label>
-      <input type="text" id="phoneNumber" formControlName="phoneNumber" placeholder="Enter your phone number">
-      <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched">
-        Phone number is required.
-      </div>
-    </div>
+  <div id="login">
+    <aside>
+      <figure>
+        <!-- <a href="index.html"><img src="img/logo_sticky.svg" width="155" height="36" alt="" class="logo_sticky"></a> -->
+      </figure>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="form-group">
+          <label for="firstName">Your Name</label>
+          <input class="form-control" type="text" id="firstName" formControlName="firstName" placeholder="Enter your first name">
+          <i class="ti-user"></i>
+          <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+            First name is required.
+          </div>
+        </div>
 
-    <div>
-      <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email" placeholder="Enter your email">
-      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
-        Valid email is required.
-      </div>
-    </div>
+        <div class="form-group">
+          <label for="lastName">Your Last Name</label>
+          <input class="form-control" type="text" id="lastName" formControlName="lastName" placeholder="Enter your last name">
+          <i class="ti-user"></i>
+          <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
+            Last name is required.
+          </div>
+        </div>
 
-    <div>
-      <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password" placeholder="Enter your password">
-      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
-        Password is required (min 6 characters).
-      </div>
-    </div>
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input class="form-control" type="email" id="email" formControlName="email" placeholder="Enter your email">
+          <i class="icon_mail_alt"></i>
+          <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+            Valid email is required.
+          </div>
+        </div>
 
-    <div>
-      <label for="role">Role</label>
-      <select id="role" formControlName="role">
-        <option value="">Select a role</option>
-        <option value="CLIENT">CLIENT</option>
-        <option value="TRAVELER">TRAVELER</option>
-        <option value="ADMIN">ADMIN</option>
-        <option value="PROVIDER">PROVIDER</option>
-      </select>
-      <div *ngIf="signupForm.get('role')?.invalid && signupForm.get('role')?.touched">
-        Role is required.
-      </div>
-    </div>
+        <div class="form-group">
+          <label for="password">Your password</label>
+          <input class="form-control" type="password" id="password" formControlName="password" placeholder="Enter your password">
+          <i class="icon_lock_alt"></i>
+          <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+            Password is required (min 6 characters).
+          </div>
+        </div>
 
-    <button type="submit" [disabled]="signupForm.invalid">Signup</button>
-  </form>
+        <div class="form-group">
+          <label for="phoneNumber">Your Phone Number</label>
+          <input class="form-control" type="text" id="phoneNumber" formControlName="phoneNumber" placeholder="Enter your phone number">
+          <i class="icon_phone"></i>
+          <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched">
+            Phone number is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" formControlName="role" class="form-control">
+            <option value="">Select a role</option>
+            <option value="CLIENT">CLIENT</option>
+            <option value="TRAVELER">TRAVELER</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="PROVIDER">PROVIDER</option>
+          </select>
+          <div *ngIf="signupForm.get('role')?.invalid && signupForm.get('role')?.touched">
+            Role is required.
+          </div>
+        </div>
+
+        <div id="pass-info" class="clearfix"></div>
+        <button type="submit" class="btn_1 rounded full-width add_top_30">Register Now!</button>
+        <div class="text-center add_top_10">Already have an account? <strong><a href="login.html">Sign In</a></strong></div>
+      </form>
+      <div class="copy">© Panagea</div>
+    </aside>
+  </div>
+  <!-- /login -->
 </div>
