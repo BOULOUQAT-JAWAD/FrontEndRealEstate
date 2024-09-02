@@ -1,0 +1,86 @@
+.strip {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.strip:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.strip figure {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.strip figure img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.strip .wrapper {
+    padding: 15px 20px;
+}
+
+.strip h3 a {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.strip h3 a:hover {
+    color: #007bff;
+}
+
+.strip p {
+    margin: 10px 0;
+    color: #666;
+}
+
+.strip .address {
+    font-size: 14px;
+    color: #999;
+    text-decoration: none;
+}
+
+.strip .address:hover {
+    color: #333;
+}
+
+.strip ul {
+    padding: 10px 20px;
+    list-style: none;
+    margin: 0;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.strip ul li {
+    margin: 0;
+    font-size: 14px;
+}
+
+.strip .loc_open {
+    color: green;
+}
+
+.strip .loc_closed {
+    color: red;
+}
+
+.strip .score {
+    display: flex;
+    align-items: center;
+}
+
+.strip .score strong {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+}

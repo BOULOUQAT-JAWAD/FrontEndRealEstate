@@ -15,13 +15,15 @@ import { AppRoutingModule } from 'src/app/root-module/app-routing.module';
 import { ReservationModule } from '../reservation/reservation.module';
 import { PjServicesModule } from '../pj-services/pj-services.module';
 import { ClientDashboardModule } from '../client-dashboard/client-dashboard.module';
+import { PropertyCardComponent } from './components/property-card/property-card.component';
 
 @NgModule({
   declarations: [
     PropertiesListComponent,
     PropertySingleComponent,
     PropertyDetailsComponent,
-    PropertyFormComponent
+    PropertyFormComponent,
+    PropertyCardComponent
   ],
   imports: [
     AppRoutingModule,
@@ -44,6 +46,7 @@ import { ClientDashboardModule } from '../client-dashboard/client-dashboard.modu
     PropertyDetailsComponent,
     PropertyFormComponent,
     PropertySingleComponent,
+    PropertyCardComponent
   ] 
 })
 export class PropertiesModule { }

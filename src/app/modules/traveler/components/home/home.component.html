@@ -1,0 +1,95 @@
+<div id="page">
+
+	<app-navbar></app-navbar>
+
+	<main>
+		<section class="hero_single version_4">
+			<div class="wrapper">
+				<div class="container">
+					<h3>Trouvez ce dont vous avez besoin !</h3>
+					<p>Découvrez les appartements et studios à travers la France.</p>
+					<form (ngSubmit)="filterProperties()" class="custom-search-form">
+						<div class="custom-search-input align-items-center">
+							<!-- Search Field -->
+							<div class="input-group">
+								<input 
+									class="custom-form-control custom-search-field" 
+									type="text" 
+									placeholder="Que cherchez-vous..." 
+									[(ngModel)]="description" 
+									name="description">
+							</div>
+							<!-- countryOrCity Field -->
+							<div class="input-group">
+								<input 
+									class="custom-form-control" 
+									type="text" 
+									placeholder="Pay" 
+									[(ngModel)]="country" 
+									name="country">
+							</div>
+							<div class="input-group">
+								<input 
+									class="custom-form-control" 
+									type="text" 
+									placeholder="Ville" 
+									[(ngModel)]="city" 
+									name="city">
+							</div>
+							<!-- Property Type Dropdown -->
+							<div class="input-group">
+								<select 
+									class="custom-form-control" 
+									[(ngModel)]="propertyType" 
+									name="propertyType">
+									<option value="">Toutes les catégories</option>
+									<option value="Appartement">Appartement</option>
+									<option value="Studio">Studio</option>
+								</select>
+							</div>
+							<!-- Checkin Date -->
+							<div class="input-group">
+								<input 
+									class="custom-form-control" 
+									type="date" 
+									[(ngModel)]="checkin" 
+									name="checkin" 
+									placeholder="Arrivée">
+							</div>
+							<!-- Checkout Date -->
+							<div class="input-group">
+								<input 
+									class="custom-form-control" 
+									type="date" 
+									[(ngModel)]="checkout" 
+									name="checkout" 
+									placeholder="Départ">
+							</div>
+							<!-- Submit Button -->
+							<div class="input-group">
+								<button type="submit" class="custom-btn custom-search-btn">Rechercher</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		<div class="container-fluid margin_80_55">
+			<div class="main_title_2">
+				<span><em></em></span>
+				<h2>Listes populaires</h2>
+				<p>Découvrez les annonces les plus populaires à travers le pays.</p>
+			</div>
+			<div id="reccomended" class="row">
+				<div *ngFor="let property of properties | slice:0:10" class="col-lg-4 col-md-6">
+					<app-property-card [property]="property"></app-property-card>
+				</div>
+			</div>
+			<div class="container">
+				<div class="btn_home_align">
+					<a href="grid-listings-filterscol.html" class="btn_1 rounded">View all</a>
+				</div>
+			</div>
+		</div>
+    </main>
+</div>

@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from '../core/core.module';
 import { ProviderInvoicesModule } from '../modules/provider-invoices/provider-invoices.module';
 import { ClientDashboardModule } from '../modules/client-dashboard/client-dashboard.module';
+import { TravelerModule } from '../modules/traveler/traveler.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ClientDashboardModule } from '../modules/client-dashboard/client-dashbo
     ToastrModule.forRoot(),
     CoreModule,
     ProviderInvoicesModule,
-    ClientDashboardModule
+    ClientDashboardModule,
+    TravelerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

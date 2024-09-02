@@ -1,0 +1,31 @@
+<div class="strip grid">
+    <figure>
+        <a class="wish_bt"></a>
+        <a>
+            <img *ngIf="property.propertyImages && property.propertyImages.length > 0; else noImage" 
+                 [src]="property.propertyImages[0]" 
+                 alt="Image de la propriété" 
+                 class="img-fluid" 
+                 width="400" 
+                 height="266">
+            <ng-template #noImage>
+                <img src="assets/images/no-image-available.png" 
+                     alt="Image non disponible" 
+                     class="img-fluid" 
+                     width="400" 
+                     height="266">
+            </ng-template>
+            <div class="read_more"><span>En savoir plus</span></div>
+        </a>
+    </figure>
+    <div class="wrapper">
+        <h3><a>{{ property.description }}</a></h3>
+        <p>{{ property.city }}, {{ property.country }}</p>
+    </div>
+    <ul>
+        <li><span class="loc_open">{{ property.propertyType }}</span></li>
+        <li>
+            <div class="score"><strong>{{ property.pricePerNight }} € / par nuit</strong></div>
+        </li>
+    </ul>
+</div>

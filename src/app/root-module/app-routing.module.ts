@@ -10,12 +10,20 @@ import { ProviderInvoicesListComponent } from '../modules/provider-invoices/comp
 import {SignupComponent} from "../modules/auth/componenets/signup/signup.component";
 import {LoginComponent} from "../modules/auth/componenets/login/login.component";
 import {ActivateGuard} from "../modules/auth/guard/activation.guard";
-
+import { HomeComponent } from '../modules/traveler/components/home/home.component';
+import { PropertiesListingComponent } from '../modules/traveler/components/properties-listing/properties-listing.component';
 
 const routes: Routes = [
   {path:"signup", component:SignupComponent},
   {path:"login", component:LoginComponent},
   {path:"activate", canActivate:[ActivateGuard],component:LoginComponent},
+  {
+    path: "",
+    children: [
+      { path: "", component: HomeComponent, },
+      { path: "properties", component: PropertiesListingComponent, },
+    ]
+  },
   {
     path: "client",
     children: [
@@ -30,8 +38,9 @@ const routes: Routes = [
     ]
   },
   {
-    path: "",
+    path: "traveler",
     children: [
+      // { path: "dashboard", component: MyDashboardComponent, }
     ]
   },
 ];

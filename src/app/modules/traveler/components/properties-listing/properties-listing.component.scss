@@ -1,0 +1,74 @@
+.custom-search-form {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.custom-search-input {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.input-group {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.custom-form-control {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50px;
+    background-color: #f7f7f7;
+    font-size: 16px;
+    color: #333;
+}
+
+.custom-btn {
+    height: 56px;
+    width: auto;
+    border-radius: 50px;
+    background-color: #FFC107;
+    color: #000;
+    font-size: 18px;
+    border: none;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 30px; /* Adjust padding for button */
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+@media (max-width: 1200px) {
+    .input-group {
+        flex: 1 1 18%; /* Adjust the width distribution among inputs */
+    }
+
+    .custom-btn {
+        flex: 0 1 auto; /* Ensure the button remains responsive */
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-search-input {
+        flex-wrap: wrap;
+    }
+
+    .input-group {
+        flex: 1 1 100%;
+        margin-bottom: 10px; /* Add space between inputs on small screens */
+    }
+
+    .custom-btn {
+        width: 100%; /* Full width button on small screens */
+    }
+}

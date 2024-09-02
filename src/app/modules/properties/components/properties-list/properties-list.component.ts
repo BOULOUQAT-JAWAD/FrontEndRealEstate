@@ -49,7 +49,7 @@ export class PropertiesListComponent implements OnInit, OnChanges {
   fetchAllProperties() {
     this.loading = true;
     this.error = false;
-    this.propertyService.getAllProperties(this.publish, this.valid).subscribe(
+    this.propertyService.getClientProperties(this.publish, this.valid).subscribe(
       (response) => {
         this.properties = response;
         this.loading = false;
