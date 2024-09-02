@@ -67,6 +67,36 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="subscriptionDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-fw fa-bell"></i>Subscription Status
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="subscriptionDropdown">
+                  <ng-container *ngIf="subscription">
+                    <h6 class="dropdown-header">Subscription Details:</h6>
+                    <div class="dropdown-item" [ngClass]="{'text-success': subscription.isClientSubscribed, 'text-danger': !subscription.isClientSubscribed}">
+                      <strong>Status: </strong> {{ subscription.isClientSubscribed ? 'Active' : 'Inactive' }}
+                    </div>
+                    <div class="dropdown-item" *ngIf="subscription.isClientSubscribed">
+                      <strong>Start Date:</strong> {{ subscription.subsDate | date:'yyyy-MM-dd' }}
+                    </div>
+                    <div class="dropdown-item" *ngIf="subscription.isClientSubscribed">
+                      <strong>End Date: </strong> {{ subscription.endSubsDate | date:'yyyy-MM-dd' }}
+                    </div>
+                    <div class="dropdown-divider" *ngIf="!subscription.isClientSubscribed"></div>
+                    <a class="dropdown-item text-center text-primary" *ngIf="!subscription.isClientSubscribed" (click)="subscribeNow()">Subscribe Now</a>
+                </ng-container>
+                  <ng-container *ngIf="!subscription">
+                    <div class="dropdown-item text-danger">
+                      Error loading subscription details.
+                    </div>
+                  </ng-container>
+                </div>
+              </li>
+              
+
+
             <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                     <i class="fa fa-fw fa-sign-out"></i>Déconnexion</a>
@@ -89,7 +119,7 @@
                 actuelle.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                <a class="btn btn-primary" href="login.html">Déconnexion</a>
+                <a class="btn btn-primary" (click)="logout()">Déconnexion</a>
             </div>
         </div>
     </div>

@@ -55,6 +55,10 @@ export class AuthService {
   }
   getUsername() {
     return this.localStorage.retrieve("username")
+  }  
+  
+  public getUserId() {
+    return this.localStorage.retrieve("id")
   }
   islogedin(){
     return (this.getJwt()!=null)
