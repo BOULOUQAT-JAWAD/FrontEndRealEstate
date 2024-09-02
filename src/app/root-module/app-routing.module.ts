@@ -8,10 +8,15 @@ import { MyDashboardComponent } from '../modules/client-dashboard/components/my-
 import { ReservationListComponent } from '../modules/reservation/components/reservation-list/reservation-list.component';
 import { ProviderInvoicesListComponent } from '../modules/provider-invoices/components/provider-invoices-list/provider-invoices-list.component';
 import { HomeComponent } from '../modules/traveler/components/home/home.component';
+import { PropertiesListingComponent } from '../modules/traveler/components/properties-listing/properties-listing.component';
 
 const routes: Routes = [
   {
-    path: "", component: HomeComponent
+    path: "",
+    children: [
+      { path: "", component: HomeComponent, },
+      { path: "properties", component: PropertiesListingComponent, },
+    ]
   },
   {
     path: "client",

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PropertyResponse } from 'src/app/modules/properties/models/property-response';
 import { PropertyType } from 'src/app/modules/properties/models/property-type';
 import { PropertyService } from 'src/app/modules/properties/services/property.service';
 
@@ -8,29 +9,32 @@ import { PropertyService } from 'src/app/modules/properties/services/property.se
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  description?:string;
-  country?:string;
-  city?:string;
-  propertyType?:PropertyType.Appartement;
+  description?: string;
+  country?: string;
+  city?: string;
+  propertyType?: PropertyType.Appartement;
   checkin?: string;
   checkout?: string;
 
-  propertyTypes = Object.values(PropertyType);
+  properties?: PropertyResponse[];
+  propertiesFetched: boolean = false;
 
   constructor(
-    private propertyService: PropertyService,
+    private propertyService: PropertyService
   ) { }
 
   ngOnInit(): void {
-    console.log("ngOnInit")
     this.filterProperties();
   }
 
   filterProperties() {
-    this.propertyService.getAllProperties(this.description, this.country, this.city, this.propertyType, this.checkin,this.checkout).subscribe(response => {
-      console.log('properties :', response);
+    this.propertiesFetched = false;
+    this.propertyService.getAllProperties(this.description, this.country, this.city, this.propertyType, this.checkin, this.checkout).subscribe(response => {
+      this.properties = response.slice(0, 6);  // Only take the first 6 properties
+      this.propertiesFetched = true;
     }, error => {
       console.error('Error getting properties:', error);
+      this.propertiesFetched = true;
     });
   }
 }
