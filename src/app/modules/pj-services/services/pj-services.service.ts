@@ -19,15 +19,15 @@ export class PjServicesService {
 
   public getPjServicesForClient(): Observable<PjService[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+  
 
-    return this.httpClient.get<PjService[]>(`${environment.baseUrl}pjServices/client`, { headers });
+    return this.httpClient.get<PjService[]>(`${environment.baseUrl}pjServices/client`);
   }
 
   public getPjServicesForVoyageur(): Observable<PjService[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
-    return this.httpClient.get<PjService[]>(`${environment.baseUrl}pjServices/voyageur`, { headers });
+    return this.httpClient.get<PjService[]>(`${environment.baseUrl}pjServices/voyageur`);
   }
 }

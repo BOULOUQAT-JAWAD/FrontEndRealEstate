@@ -14,8 +14,8 @@ export class ImageService {
 
   public uploadImages(request: FormData): Observable<string[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
-    return this.httpClient.post<string[]>(`${environment.baseUrl}images/upload`, request, { headers });
+    return this.httpClient.post<string[]>(`${environment.baseUrl}images/upload`, request);
   }
 }

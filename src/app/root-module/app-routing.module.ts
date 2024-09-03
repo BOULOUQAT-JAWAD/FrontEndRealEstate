@@ -13,6 +13,7 @@ import {ActivateGuard} from "../modules/auth/guard/activation.guard";
 import { HomeComponent } from '../modules/traveler/components/home/home.component';
 import { PropertiesListingComponent } from '../modules/traveler/components/properties-listing/properties-listing.component';
 import { ActivationComponent } from '../modules/auth/componenets/activation/activation.component';
+import { PjServicesListComponent } from '../modules/pj-services/components/pj-services-list/pj-services-list.component';
 
 const routes: Routes = [
   {path:"signup", component:SignupComponent},
@@ -35,7 +36,8 @@ const routes: Routes = [
       { path: "properties/:id", component: PropertyDetailsComponent },
       { path: 'property/add', component: PropertyFormComponent },
       { path: 'property/edit/:id', component: PropertyFormComponent },
-      { path: 'property/delete/:id', component: PropertySingleComponent }
+      { path: 'property/delete/:id', component: PropertySingleComponent },
+      { path: 'PjServices', component: PjServicesListComponent }
     ]
   },
   {

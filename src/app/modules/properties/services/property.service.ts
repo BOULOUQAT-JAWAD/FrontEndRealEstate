@@ -20,7 +20,7 @@ export class PropertyService {
 
   public getClientProperties(publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
     console.log('publish : ' + publish)
     let params = new HttpParams();
@@ -35,7 +35,7 @@ export class PropertyService {
         .set('valid', valid);
     }
 
-    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties`, { headers, params });
+    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties`, {   params });
   }
 
   public getClientOccupiedProperties(startDate: string, endDate: string, publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
@@ -55,9 +55,9 @@ export class PropertyService {
         .set('valid', valid);
     }
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
-    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/occupied`, { headers, params });
+    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/occupied`, {   params });
   }
 
   public getClientAvailableProperties(startDate: string, endDate: string, publish: boolean | null, valid: boolean | null): Observable<PropertyResponse[]> {
@@ -77,30 +77,30 @@ export class PropertyService {
         .set('valid', valid);
     }
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
-    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/available`, { headers, params });
+    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/available`, {   params });
   }
 
   public getProperty(id: number): Observable<PropertyResponse> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
-    return this.httpClient.get<PropertyResponse>(`${environment.baseUrl}properties/${id}`, { headers });
+    return this.httpClient.get<PropertyResponse>(`${environment.baseUrl}properties/${id}`);
   }
 
   public saveOrUpdateProperty(request: PropertyRequest): Observable<PropertyResponse> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
-    return this.httpClient.post<PropertyResponse>(`${environment.baseUrl}properties`, request, { headers });
+    return this.httpClient.post<PropertyResponse>(`${environment.baseUrl}properties`, request);
   }
 
   public deleteProperty(id: number): Observable<PropertyResponse> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
-    return this.httpClient.delete<PropertyResponse>(`${environment.baseUrl}properties/${id}`, { headers });
+    return this.httpClient.delete<PropertyResponse>(`${environment.baseUrl}properties/${id}`);
   }
 
   public getAllProperties(description?: string, country?: string, city?: string, propertyType?: PropertyType, checkinDate?: string, checkoutDate?: string): Observable<PropertyResponse[]> {

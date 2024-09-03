@@ -19,7 +19,7 @@ export class ReservationService {
 
   public getPropertyReservations(propertyId: number, checkinDate?: string, checkoutDate?: string, status?: string): Observable<ReservationResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
     let params = new HttpParams()
       .set('propertyId', propertyId.toString());
@@ -37,13 +37,13 @@ export class ReservationService {
         .set('status', status);
     }
 
-    return this.httpClient.get<ReservationResponse[]>(`${environment.baseUrl}reservations/property`, { headers, params });
+    return this.httpClient.get<ReservationResponse[]>(`${environment.baseUrl}reservations/property`, {   params });
   }
 
 
   public getClientReservations(checkinDate?: string, checkoutDate?: string, status?: string): Observable<ReservationResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
     let params = new HttpParams();
 
@@ -60,12 +60,12 @@ export class ReservationService {
         .set('status', status);
     }
 
-    return this.httpClient.get<ReservationResponse[]>(`${environment.baseUrl}reservations/client`, { headers, params });
+    return this.httpClient.get<ReservationResponse[]>(`${environment.baseUrl}reservations/client`, {   params });
   }
 
   public getClientReservationsDateRange(checkinDate?: string, checkoutDate?: string, status?: string): Observable<ReservationResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
     let params = new HttpParams();
 
@@ -82,6 +82,6 @@ export class ReservationService {
         .set('status', status);
     }
 
-    return this.httpClient.get<ReservationResponse[]>(`${environment.baseUrl}reservations/client/income`, { headers, params });
+    return this.httpClient.get<ReservationResponse[]>(`${environment.baseUrl}reservations/client/income`, {   params });
   }
 }

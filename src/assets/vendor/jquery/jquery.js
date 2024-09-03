@@ -9990,7 +9990,7 @@ jQuery.ajaxTransport( function( options ) {
 	// Cross domain only allowed if supported through XMLHttpRequest
 	if ( support.cors || xhrSupported && !options.crossDomain ) {
 		return {
-			send: function( headers, complete ) {
+			send: function(   complete ) {
 				var i,
 					xhr = options.xhr();
 

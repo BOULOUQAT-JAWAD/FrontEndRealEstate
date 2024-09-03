@@ -21,7 +21,7 @@ export class ProviderInvoiceService {
 
   public getClientReservationsServices(startDate: string | undefined, endDate: string | undefined, status: ProviderInvoiceStatus | null): Observable<ProviderInvoice[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
     let params = new HttpParams();
     if(startDate != null){
@@ -37,12 +37,12 @@ export class ProviderInvoiceService {
       .set('status', status)
     }
 
-    return this.httpClient.get<ProviderInvoice[]>(`${environment.baseUrl}provideInvoices/reservations/client`, { headers, params });
+    return this.httpClient.get<ProviderInvoice[]>(`${environment.baseUrl}provideInvoices/reservations/client`, {   params });
   }
 
   public getClientPropertiesServices(startDate: string | undefined, endDate: string | undefined, status: ProviderInvoiceStatus | null): Observable<ProviderInvoice[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+     
 
     let params = new HttpParams();
     if(startDate != null){
@@ -58,6 +58,6 @@ export class ProviderInvoiceService {
       .set('status', status)
     }
 
-    return this.httpClient.get<ProviderInvoice[]>(`${environment.baseUrl}provideInvoices/properties/client`, { headers, params });
+    return this.httpClient.get<ProviderInvoice[]>(`${environment.baseUrl}provideInvoices/properties/client`, {   params });
   }
 }

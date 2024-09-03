@@ -36,7 +36,6 @@
               "src/assets/css/admin.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/style.css",
-              "src/assets/css/vendors.css",
               "src/assets/css/custom.css",
               "node_modules/ngx-toastr/toastr.css"
             ],

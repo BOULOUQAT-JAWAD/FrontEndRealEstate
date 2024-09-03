@@ -1,4 +1,4 @@
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
 }
@@ -41,4 +41,29 @@ button {
 
 button:hover {
     background-color: #45a049;
+} */
+
+.service-item {
+    margin-bottom: 15px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    text-align: left;
+}
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item input {
+    margin-right: 10px;
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PjServicesListComponent } from './components/pj-services-list/pj-services-list.component';
 import { PjServicesSingleComponent } from './components/pj-services-single/pj-services-single.component';
+import { SharedModule } from "../../shared/shared.module";
 
 
 
@@ -11,10 +12,14 @@ import { PjServicesSingleComponent } from './components/pj-services-single/pj-se
     PjServicesSingleComponent,
   ],
   imports: [
-    CommonModule
-  ], 
+    CommonModule,
+    SharedModule
+], 
   exports:[
     PjServicesListComponent,
   ]
 })
-export class PjServicesModule { }
+export class PjServicesModule {
+
+  
+ }
