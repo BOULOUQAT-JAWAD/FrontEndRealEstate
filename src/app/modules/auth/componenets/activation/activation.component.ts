@@ -23,25 +23,26 @@ export class ActivationComponent implements OnInit{
   }
 
   activateUser(token: string): void {
-      this.authService.activateUser(token).subscribe(
-        response => {
-          console.log('User activated:', response);
-          this.authService.saveUserInfoInLocalStorage(response);
-          this.router.navigate(["/client/dashboard?userActivated=true"]).then(
-            ()=>{
-              window.location.reload()
-            }
-          )
-        },
-        error => {
-          this.router.navigate(["/login"]).then(
-            ()=>{
-              window.location.reload()
-            }
-          )
-          console.error('Activation failed:', error);
-        }
-      )
+    console.log("trying to activate the user");
+    this.authService.activateUser(token).subscribe(
+      response => {
+        console.log('User activated:', response);
+        this.authService.saveUserInfoInLocalStorage(response);
+        this.router.navigate(
+          ["/client/dashboard"], 
+          { queryParams: { userActivated: true } }
+        ).then(() => {
+          window.location.reload();
+        });
+      },
+      error => {
+        console.error('Activation failed:', error);
+        this.router.navigate(["/login"]).then(() => {
+          window.location.reload();
+        });
+      }
+    );
   }
+  
 
 }

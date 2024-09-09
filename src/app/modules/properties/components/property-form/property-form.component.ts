@@ -93,6 +93,7 @@ export class PropertyFormComponent implements OnInit {
   initializeForm(): void {
     this.propertyForm = this.fb.group({
       propertyId: [null],
+      title: ['', Validators.required], // Added title field
       description: ['', Validators.required],
       country: ['', Validators.required],
       city: ['', Validators.required],
@@ -115,6 +116,7 @@ export class PropertyFormComponent implements OnInit {
       this.propertyForm.patchValue({
         propertyId: property.propertyId,
         description: property.description,
+        title: property.title, // Added title field
         country: property.country,
         city: property.city,
         propertyType: property.propertyType,

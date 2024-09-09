@@ -14,56 +14,69 @@
                     <span class="nav-link-text">Tableau de bord</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
-              <a class="nav-link" href="/client/property/add">
+           <!-- Show only if the client is subscribed -->
+           <li *ngIf="subscription?.isClientSubscribed" class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
+            <a class="nav-link" href="/client/property/add">
                 <i class="fa fa-fw fa-plus-circle"></i>
                 <span class="nav-link-text">Ajouter une propriété</span>
-              </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mes propriétés">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMylistings">
-                    <i class="fa fa-fw fa-list"></i>
-                    <span class="nav-link-text">Liste des propriétés</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseMylistings">
-                    <li>
-                        <a href="/client/properties?publish=true">
-                            <i class="fa fa-fw fa-check-circle text-success"></i> Publiées
-                            <span class="badge badge-pill badge-success"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/client/properties?publish=false">
-                            <i class="fa fa-fw fa-times-circle text-primary"></i> Non publiées
-                            <span class="badge badge-pill badge-primary"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Réservations">
-                <a class="nav-link" href="/client/reservations">
-                    <i class="fa fa-fw fa-calendar-check-o"></i>
-                    <span class="nav-link-text">Réservations </span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
-                <a class="nav-link" href="/client/providerInvoices/properties">
-                    <i class="fa fa-fw fa-list"></i>
-                    <span class="nav-link-text">Liste des interventions</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
-                <a class="nav-link" href="/client/PjServices">
-                    <i class="fa fa-fw fa-user"></i>
-                    <span class="nav-link-text">Services de PJ</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
-                <a class="nav-link" href="/client/user-profile">
-                    <i class="fa fa-fw fa-user"></i>
-                    <span class="nav-link-text">Mon Profil</span>
-                </a>
-            </li>
+            </a>
+        </li>
+
+        <li *ngIf="subscription?.isClientSubscribed" class="nav-item" data-toggle="tooltip" data-placement="right" title="Mes propriétés">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMylistings">
+                <i class="fa fa-fw fa-list"></i>
+                <span class="nav-link-text">Liste des propriétés</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseMylistings">
+                <li>
+                    <a href="/client/properties?publish=true">
+                        <i class="fa fa-fw fa-check-circle text-success"></i> Publiées
+                        <span class="badge badge-pill badge-success"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/client/properties?publish=false">
+                        <i class="fa fa-fw fa-times-circle text-primary"></i> Non publiées
+                        <span class="badge badge-pill badge-primary"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li *ngIf="subscription?.isClientSubscribed" class="nav-item" data-toggle="tooltip" data-placement="right" title="Réservations">
+            <a class="nav-link" href="/client/reservations">
+                <i class="fa fa-fw fa-calendar-check-o"></i>
+                <span class="nav-link-text">Réservations</span>
+            </a>
+        </li>
+
+        <li *ngIf="subscription?.isClientSubscribed" class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
+            <a class="nav-link" href="/client/providerInvoices/properties">
+                <i class="fa fa-fw fa-list"></i>
+                <span class="nav-link-text">Liste des interventions</span>
+            </a>
+        </li>
+
+        <li *ngIf="subscription?.isClientSubscribed" class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
+            <a class="nav-link" href="/client/PjServices">
+                <i class="fa fa-fw fa-user"></i>
+                <span class="nav-link-text">Services de PJ</span>
+            </a>
+        </li>
+
+        <li  class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
+            <a class="nav-link" href="/client/user-profile">
+                <i class="fa fa-fw fa-user"></i>
+                <span class="nav-link-text">Mon Profil</span>
+            </a>
+        </li>
+
+        <!-- Message when the client is not subscribed -->
+        <li *ngIf="!subscription?.isClientSubscribed" class="nav-item">
+            <div class="nav-link text-danger">
+                Vous devez être abonné pour ajouter des propriétés.
+            </div>
+        </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
@@ -73,6 +86,10 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <img style="height: 25px;"  (click)="navigateToCart()"   src="/assets/img/9073722_cart_icon.png" alt="">
+             </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="subscriptionDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -101,7 +118,7 @@
                 </div>
               </li>
               
-
+            
 
             <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" data-target="#exampleModal">

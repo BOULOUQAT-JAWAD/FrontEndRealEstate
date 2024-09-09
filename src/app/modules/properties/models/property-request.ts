@@ -2,6 +2,7 @@ import { PjService } from "../../pj-services/models/pj-service";
 
 export interface PropertyRequest {
     propertyId?: number;
+    title:string;
     description: string;
     country: string;
     city: string;

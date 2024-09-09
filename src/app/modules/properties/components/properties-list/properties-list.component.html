@@ -60,6 +60,7 @@
                         <thead>
                             <tr>
                                 <th></th>
+                                <th>Titre</th> <!-- New column for title -->
                                 <th>Ville</th>
                                 <th>Pays</th>
                                 <th>Type</th>
@@ -73,6 +74,7 @@
                         <tfoot>
                             <tr>
                                 <th></th>
+                                <th>Titre</th> <!-- New column for title -->
                                 <th>Ville</th>
                                 <th>Pays</th>
                                 <th>Type</th>
@@ -82,31 +84,31 @@
                                 <th>Valide</th>
                                 <th>Actions</th>
                             </tr>
-                        </tfoot> 
+                        </tfoot>
                         <tbody>
                             <tr *ngFor="let property of properties">
                                 <td>
                                     <img *ngIf="property.propertyImages != null && property.propertyImages.length > 0" [src]="property.propertyImages[0]" alt="Property Image"
                                         style="width: 100px; height: 70px;">
                                 </td>
+                                <td>{{ property.title }}</td> <!-- Displaying the title -->
                                 <td>{{ property.city }}</td>
                                 <td>{{ property.country }}</td>
                                 <td>{{ property.propertyType }}</td>
                                 <td>{{ property.propertyStatus }}</td>
                                 <td>{{ property.pricePerNight }} €</td>
                                 <td>
-                                    <i [ngClass]="property.publish ? 'fa fa-check-circle approved' : 'fa fa-times-circle cancel'" 
-                                       aria-hidden="true"></i>
+                                    <i [ngClass]="property.publish ? 'fa fa-check-circle approved' : 'fa fa-times-circle cancel'" aria-hidden="true"></i>
                                 </td>
                                 <td>
-                                    <i [ngClass]="property.valid ? 'fa fa-check-circle approved' : 'fa fa-times-circle cancel'" 
-                                       aria-hidden="true"></i>
+                                    <i [ngClass]="property.valid ? 'fa fa-check-circle approved' : 'fa fa-times-circle cancel'" aria-hidden="true"></i>
                                 </td>
                                 <td>
                                     <app-property-single [propertyData]="property"></app-property-single>
                                 </td>
                             </tr>
                         </tbody>
+                        
                     </table>
                 </div>
             </div>

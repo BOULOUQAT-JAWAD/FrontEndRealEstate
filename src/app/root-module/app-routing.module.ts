@@ -14,6 +14,8 @@ import { HomeComponent } from '../modules/traveler/components/home/home.componen
 import { PropertiesListingComponent } from '../modules/traveler/components/properties-listing/properties-listing.component';
 import { ActivationComponent } from '../modules/auth/componenets/activation/activation.component';
 import { PjServicesListComponent } from '../modules/pj-services/components/pj-services-list/pj-services-list.component';
+import { CartComponent } from '../modules/cart/components/cart/cart.component';
+import { CartSuccessComponent } from '../modules/cart/components/cart-success/cart-success.component';
 
 const routes: Routes = [
   {path:"signup", component:SignupComponent},
@@ -37,7 +39,11 @@ const routes: Routes = [
       { path: 'property/add', component: PropertyFormComponent },
       { path: 'property/edit/:id', component: PropertyFormComponent },
       { path: 'property/delete/:id', component: PropertySingleComponent },
-      { path: 'PjServices', component: PjServicesListComponent }
+      { path: 'PjServices', component: PjServicesListComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'servicePayed', component: CartSuccessComponent }
+
+
     ]
   },
   {

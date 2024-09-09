@@ -11,6 +11,9 @@ import { SubsCheckout } from '../models/SubsCheckout.response';
   styleUrls: ['./client-sidebar.component.scss']
 })
 export class ClientSidebarComponent implements OnInit{
+navigateToCart() {
+  this.activeRoute.navigate(['/client/cart']);
+}
 
   subscription: ClientSubscription | null = null;
 

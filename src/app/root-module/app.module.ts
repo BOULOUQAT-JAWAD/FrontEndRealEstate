@@ -14,6 +14,7 @@ import { ClientDashboardModule } from '../modules/client-dashboard/client-dashbo
 import { TravelerModule } from '../modules/traveler/traveler.module';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { TokenInterceptor } from '../modules/auth/interceptor/token.interceptor';
+import { CartModule } from '../modules/cart/cart.module';
 
 @NgModule({
   declarations: [
@@ -32,11 +33,12 @@ import { TokenInterceptor } from '../modules/auth/interceptor/token.interceptor'
     ClientDashboardModule,
     TravelerModule,
     NgxWebstorageModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CartModule
 
   ],
   providers: [
-//    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

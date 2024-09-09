@@ -1,0 +1,92 @@
+<app-client-sidebar></app-client-sidebar>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="hero_in cart_section">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="bs-wizard clearfix">
+                        <div class="bs-wizard-step active">
+                            <div class="text-center bs-wizard-stepnum">Votre panier</div>
+                            <div class="progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <a href="#0" class="bs-wizard-dot"></a>
+                        </div>
+    
+                        <div class="bs-wizard-step disabled">
+                            <div class="text-center bs-wizard-stepnum">Paiement</div>
+                            <div class="progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <a href="#0" class="bs-wizard-dot"></a>
+                        </div>
+    
+                        <div class="bs-wizard-step disabled">
+                            <div class="text-center bs-wizard-stepnum">Terminé !</div>
+                            <div class="progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <a href="#0" class="bs-wizard-dot"></a>
+                        </div>
+                    </div>
+                    <!-- Fin bs-wizard -->
+                </div>
+            </div>
+        </div>
+        <!--/hero_in-->
+    
+        <div class="bg_color_1">
+            <div *ngIf="isCartEmpty;" class="empty-cart-message">
+                <div class="text-center">
+                    <h3>Votre panier est vide</h3>
+                    <p>Il semble que vous n'ayez encore ajouté aucun service. Explorez vos propriétés et services pour les ajouter à votre panier.</p>
+                </div>
+            </div>
+            <div class="container margin_60_35" *ngIf="!isCartEmpty">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="box_cart">
+                            <table class="table cart-list">
+                                <thead>
+                                    <tr>
+                                        <th>Propriété</th>
+                                        <th>Services</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let property of cart?.propertyServiceCheckouts">
+                                        <td>
+                                            <span class="item_cart">{{ property?.propertyId.split('-')[1] }}</span>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <li *ngFor="let service of property?.pjServicesIds">{{ service?.split('-')[1] }}</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <strong>{{ calculateSubtotal(property?.pjServicesIds) }}€</strong>
+                                        </td>
+                                        <td class="options" style="width:5%; text-align:center;">
+                                            <a href="#"><i class="icon-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            
+                    <aside class="col-lg-4" id="sidebar">
+                        <div class="box_detail">
+                            <div id="total_cart">
+                                Total <span class="float-end">{{ total }}€</span>
+                            </div>
+                            <a (click)="checkout()" class="btn_1 full-width purchase">Passer à la caisse</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

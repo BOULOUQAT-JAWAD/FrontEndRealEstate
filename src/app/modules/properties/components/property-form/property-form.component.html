@@ -18,6 +18,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label>Titre</label>
+                            <input id="title" formControlName="title" type="text" class="form-control" placeholder="Entrez le titre">
+                            <div *ngIf="propertyForm.get('title')?.invalid && propertyForm.get('title')?.touched" class="error">
+                                Le titre est requis.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label>Description</label>
                             <input id="description" formControlName="description" type="text" class="form-control"
                                 placeholder="Entrez la description">

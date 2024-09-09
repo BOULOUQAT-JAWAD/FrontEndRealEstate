@@ -51,7 +51,7 @@ export class PropertiesListComponent implements OnInit, OnChanges {
     this.error = false;
     this.propertyService.getClientProperties(this.publish, this.valid).subscribe(
       (response) => {
-        this.properties = response;
+        this.properties = response; // Assuming each property in the response has a title
         this.loading = false;
         if (this.properties.length === 0) {
           this.customSnackBar.show('Aucune propriété trouvée.', 'info', 'blue');
@@ -64,7 +64,8 @@ export class PropertiesListComponent implements OnInit, OnChanges {
         this.customSnackBar.show('Erreur lors de la récupération des propriétés. Veuillez réessayer plus tard.', 'error', 'red');
       }
     );
-  }
+}
+
 
   fetchOccupiedProperties() {
     if (!this.startDate || !this.endDate) {

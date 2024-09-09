@@ -3,6 +3,7 @@ import { PropertyType } from "./property-type";
 
 export interface PropertyResponse {
     propertyId: number;
+    title:string;
     description: string;
     country: string;
     city: string;
