@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<app-spinner *ngIf="!propertyFetched"></app-spinner>
+<main *ngIf="propertyFetched">
+
+    <div class="container margin_60_35">
+        <div class="row">
+            <div class="col-lg-8">
+                <div id="carousel_in" class="owl-carousel owl-theme add_bottom_30">
+                    <div class="property-carousel">
+                        <div class="carousel-wrapper">
+                            <button class="carousel-control prev" (click)="prevImage()">&#10094;</button>
+                            <img [src]="propertyData.propertyImages[currentIndex]" alt="Property Image"
+                                class="carousel-image img-fluid">
+                            <button class="carousel-control next" (click)="nextImage()">&#10095;</button>
+                        </div>
+                    </div>
+                </div>
+                <nav class="secondary_nav sticky_horizontal_2">
+                    <div class="container">
+                        <ul class="clearfix">
+                            <li><a href="" class="active">Description</a></li>
+                            <li><a href=""></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <aside class="col-lg-4" id="sidebar">
+                <div class="box_detail booking">
+                    <div class="price">
+                        <span>{{ propertyData.pricePerNight }}€ <small>/ par nuit</small></span>
+                        <!-- <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div> -->
+                    </div>
+                    <form (ngSubmit)="isPropertyAvailable()">
+                        <div class="form-group" id="input-dates">
+                            <h6>Arrivée : </h6>
+                            <div class="input-group">
+                                <input class="form-control" type="date" [(ngModel)]="checkin" name="checkin"
+                                    placeholder="Arrivée" [min]="today">
+                            </div>
+                            <h1></h1>
+                            <h6>Départ : </h6>
+                            <div class="input-group">
+                                <input class="form-control" type="date" [(ngModel)]="checkout" name="checkout"
+                                    placeholder="Départ" [min]="today">
+                            </div>
+                        </div>
+                        <button type="submit" class="add_top_30 btn_1 full-width purchase">Réserver</button>
+                    </form>
+                </div>
+            </aside>
+            <div class="col-lg-8">
+
+                <section id="description">
+                    <div class="detail_title_1">
+                        <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i
+                                class="icon_star"></i><i class="icon_star"></i></div>
+                        <h1>{{ propertyData.propertyType }}</h1>
+                        <p>{{ propertyData.city }}, {{ propertyData.country }}</p>
+                    </div>
+
+                    <h6>Surface : </h6>
+                    <p>{{ propertyData.surface }} (m²) </p>
+                    <h6>Nombre de Chambres : </h6>
+                    <p>{{ propertyData.numberOfRooms }} chambres </p>
+                    <h6>Nombre Max des personnes : </h6>
+                    <p>{{ propertyData.numberOfPersons }} personnes </p>
+
+                </section>
+                <p>{{ propertyData.description }}</p>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+     
+
+</main>

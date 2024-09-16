@@ -3,6 +3,7 @@ import { ReservationResponse } from '../models/reservation-response';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/app/environment/environment';
 import { Observable } from 'rxjs';
+import { ReservationRequest } from '../models/reservation-request';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,11 @@ export class ReservationService {
     }
 
     return this.httpClient.get<ReservationResponse[]>(`${environment.baseUrl}reservations/client/income`, {   params });
+  }
+
+  public saveOrUpdateReservation(request: ReservationRequest): Observable<ReservationResponse> {
+
+    return this.httpClient.post<ReservationResponse>(`${environment.baseUrl}reservations`, request);
+
   }
 }
