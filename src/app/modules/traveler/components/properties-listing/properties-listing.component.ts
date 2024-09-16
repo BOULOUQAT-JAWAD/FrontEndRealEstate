@@ -37,11 +37,16 @@ export class PropertiesListingComponent implements OnInit {
   error = false;
   errorMessage: string | null = null;
 
+  today: string;
+
   constructor(
     private propertyService: PropertyService,
     private route: ActivatedRoute,
     private customSnackBar: CustomSnackBarService
-  ) { }
+  ) { 
+    const currentDate = new Date();
+    this.today = currentDate.toISOString().split('T')[0];
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {

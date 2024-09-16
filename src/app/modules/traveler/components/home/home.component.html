@@ -54,7 +54,8 @@
 									type="date" 
 									[(ngModel)]="checkin" 
 									name="checkin" 
-									placeholder="Arrivée">
+									placeholder="Arrivée"
+									[min]="today">
 							</div>
 							<!-- Checkout Date -->
 							<div class="input-group">
@@ -63,7 +64,8 @@
 									type="date" 
 									[(ngModel)]="checkout" 
 									name="checkout" 
-									placeholder="Départ">
+									placeholder="Départ"
+									[min]="today">
 							</div>
 							<!-- Submit Button -->
 							<div class="input-group">

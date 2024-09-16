@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   propertyType?: PropertyType.Appartement;
   checkin?: string;
   checkout?: string;
+  today: string;
 
   properties?: PropertyResponse[];
   propertiesFetched: boolean = false;
@@ -23,7 +24,10 @@ export class HomeComponent implements OnInit {
   constructor(
     private propertyService: PropertyService,
     private router: Router
-  ) { }
+  ) {
+    const currentDate = new Date();
+    this.today = currentDate.toISOString().split('T')[0];
+   }
 
   ngOnInit(): void {
     this.filterProperties();

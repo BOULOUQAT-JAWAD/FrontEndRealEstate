@@ -1,7 +1,7 @@
 <div class="strip grid">
     <figure>
         <a class="wish_bt"></a>
-        <a>
+        <a href="/property/{{property.propertyId}}">
             <img *ngIf="property.propertyImages && property.propertyImages.length > 0; else noImage" 
                  [src]="property.propertyImages[0]" 
                  alt="Image de la propriété" 

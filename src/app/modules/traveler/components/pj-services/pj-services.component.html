@@ -1,0 +1,28 @@
+<div style="margin: 50px;">
+    <h2>Sélectionnez des services pour votre Réservation :</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Sélectionner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let service of servicesList">
+                    <td>{{ service.title }}</td>
+                    <td>{{ service.description }}</td>
+                    <td>{{ service.price | currency:'EUR':'symbol' }}</td>
+                    <td>
+                        <input type="checkbox" (change)="toggleServiceSelection(service.pjServiceId, $event)">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button mat-button (click)="saveSelectedServices()" style="margin-right: 10px;">Confirmer la sélection</button>
+    <button mat-button class="close-button" (click)="closeDialog()">Fermer</button>
+
+</div>

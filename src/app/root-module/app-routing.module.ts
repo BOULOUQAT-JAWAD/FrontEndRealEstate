@@ -14,6 +14,7 @@ import { HomeComponent } from '../modules/traveler/components/home/home.componen
 import { PropertiesListingComponent } from '../modules/traveler/components/properties-listing/properties-listing.component';
 import { ActivationComponent } from '../modules/auth/componenets/activation/activation.component';
 import { PjServicesListComponent } from '../modules/pj-services/components/pj-services-list/pj-services-list.component';
+import { OnePropertyComponent } from '../modules/traveler/components/one-property/one-property.component';
 
 const routes: Routes = [
   {path:"signup", component:SignupComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
     children: [
       { path: "", component: HomeComponent, },
       { path: "properties", component: PropertiesListingComponent, },
+      { path: "property/:id", component: OnePropertyComponent, },
     ]
   },
   {

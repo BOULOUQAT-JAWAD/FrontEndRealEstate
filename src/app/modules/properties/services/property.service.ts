@@ -89,6 +89,19 @@ export class PropertyService {
     return this.httpClient.get<PropertyResponse>(`${environment.baseUrl}properties/${id}`);
   }
 
+  public getOneProperty(id: number): Observable<PropertyResponse> {
+    // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+     
+
+    return this.httpClient.get<PropertyResponse>(`${environment.baseUrl}properties/home/${id}`);
+  }
+
+  public isPropertyAvailable(id: number, checkinDate: string, checkoutDate: string): Observable<boolean> {
+    let params = new HttpParams().set('checkinDate', checkinDate).set('checkoutDate', checkoutDate);
+
+    return this.httpClient.get<boolean>(`${environment.baseUrl}properties/home/${id}/available`,{params});
+  }
+
   public saveOrUpdateProperty(request: PropertyRequest): Observable<PropertyResponse> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
      
@@ -178,6 +191,6 @@ export class PropertyService {
       params = params.set('maxPricePerNight', maxPricePerNight.toString());
     }
   
-    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/getAll`, { params });
+    return this.httpClient.get<PropertyResponse[]>(`${environment.baseUrl}properties/home/getAll`, { params });
   }
 }
