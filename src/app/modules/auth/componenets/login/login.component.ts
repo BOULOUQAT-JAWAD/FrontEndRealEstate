@@ -4,6 +4,7 @@ import {LoginRequest} from "../../models/login.request";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import { ToastrService } from 'ngx-toastr';
+import { LoginResponse } from '../../models/login.response';
 
 
 @Component({
@@ -68,23 +69,21 @@ export class LoginComponent implements OnInit{
     }
 
     this.authService.loginService(this.loginReq).subscribe(
-      (response)=>{
-
-        this.isloading=false
-        if (response){
+      (response:LoginResponse)=>{
+        if(response.role == "CLIENT"){
           this.router.navigate(["/client/dashboard"]).then(
             ()=>{
               window.location.reload()
             }
           )
-        } else {
-          this.router.navigate(["/admin/products"]).then(
+        }
+        else if(response.role == "TRAVELER"){
+          this.router.navigate(["/"]).then(
             ()=>{
               window.location.reload()
             }
           )
         }
-
       }
       ,
       error => {

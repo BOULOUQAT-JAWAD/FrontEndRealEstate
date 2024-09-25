@@ -9,6 +9,7 @@ import {catchError, Observable, throwError} from 'rxjs';
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "ngx-webstorage";
+import { environment } from 'src/app/environment/environment';
 
 @Injectable(
   {providedIn:"root"}
@@ -18,10 +19,14 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService:AuthService,private router: Router,
               private localStorage:LocalStorageService) {}
 
+frontendBaseUrl = environment.frontendBaseUrl; // or wherever your base URL is defined
+
+
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (request.url.includes('login') ||
       request.url.includes('signup') ||
-      request.url.includes('activate')   ) {
+      request.url.includes('activate') ||
+      request.url.includes('api/properties/home/')  ) {
       return next.handle(request);
     }
 

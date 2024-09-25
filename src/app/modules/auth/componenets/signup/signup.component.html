@@ -63,8 +63,8 @@
             <option value="">Select a role</option>
             <option value="CLIENT">CLIENT</option>
             <option value="TRAVELER">TRAVELER</option>
-            <option value="ADMIN">ADMIN</option>
-            <option value="PROVIDER">PROVIDER</option>
+         <!--    <option value="ADMIN">ADMIN</option>
+            <option value="PROVIDER">PROVIDER</option> -->
           </select>
           <div *ngIf="signupForm.get('role')?.invalid && signupForm.get('role')?.touched">
             Role is required.

@@ -5,4 +5,5 @@ export interface LoginResponse {
   phoneNumber: string;
   userId: string;
   token: string;
+  role: string
 }

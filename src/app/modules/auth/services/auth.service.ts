@@ -34,20 +34,15 @@ export class AuthService {
     return  this.http.post(environment.baseUrl+"auth/signup",singupForm)
   }
 
-  loginService(loginForm:LoginRequest){
-    return  this.http.post<LoginResponse>(environment.baseUrl+"auth/login",loginForm).pipe(
+  loginService(loginForm:LoginRequest) : Observable<LoginResponse>{
+    return this.http.post<LoginResponse>(environment.baseUrl+"auth/login",loginForm).pipe(
       map(
         (data:LoginResponse)=>{
-          // if (data.role=='admin' || data.role=='delivery'){
-          //   this.localStorage.store("adminRole",data.role)
-          //   return false;
-          // }
-          // else {
             console.log("should work")
             this.localStorage.store('token', data.token);
             this.localStorage.store('id', data.userId);
-            return  true;
-          // }
+            return  data;
+
 
         }
       )
