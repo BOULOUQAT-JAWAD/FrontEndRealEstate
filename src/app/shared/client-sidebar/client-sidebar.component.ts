@@ -40,7 +40,9 @@ navigateToCart() {
 
     logout() {
       this.localStorage.clear();
-      this.activeRoute.navigate(["/login"])
+      this.activeRoute.navigate(['/']).then(() => {
+        window.location.reload();
+      });
     }
 
     subscribeNow() {

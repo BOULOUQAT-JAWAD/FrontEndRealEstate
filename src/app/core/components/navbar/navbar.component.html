@@ -4,13 +4,17 @@
             <div class="col-lg-3 col-12">
                 <div id="logo">
                     <a href="">
-                        <img src="" width="165" height="35" alt="" class="logo_sticky">
+                        <img src="assets/images/logo.png" width="165" height="35" alt="RealEstate Logo" class="logo_sticky">
                     </a>
                 </div>
             </div>
             <div class="col-lg-9 col-12">
                 <ul id="top_menu">
-                    <li><a href="login" class="btn_add">Connexion</a></li>
+                    <li *ngIf="!isLoggedIn"><a href="login" class="btn_add">Connexion</a></li>
+                    <li *ngIf="isLoggedIn" class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                            <i class="btn_add">Déconnexion</i></a>
+                    </li>
                 </ul>
                 <!-- /top_menu -->
                 <a href="#menu" class="btn_mobile">
@@ -22,9 +26,9 @@
                 </a>
                 <nav id="menu" class="main-menu">
                     <ul>
-                        <li><span><a href="#0">Home</a></span></li>
-                        <li><span><a href="#0">Home</a></span></li>
-                        <li><span><a href="#0">Home</a></span></li>
+                        <!-- <li><span><a href="#0">Home</a></span></li> -->
+                        <!-- <li><span><a href="#0">Home</a></span></li>
+                        <li><span><a href="#0">Home</a></span></li> -->
                     </ul>
                 </nav>
             </div>
@@ -34,3 +38,22 @@
     <!-- /container -->
 </header>
 <!-- /header -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Fermer">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à terminer votre session
+            actuelle.</div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+            <a class="btn btn-primary" (click)="logout()">Déconnexion</a>
+        </div>
+    </div>
+</div>
+</div>

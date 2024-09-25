@@ -1,6 +1,6 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
-    <a class="navbar-brand" routerLink=""><img alt="" width="165" height="36"></a>
+    <a class="navbar-brand" style="margin-left: 20px;" href=""><img src="assets/images/logo.png" alt="" width="165" height="36"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -64,12 +64,12 @@
             </a>
         </li>
 
-        <li  class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
+        <!-- <li  class="nav-item" data-toggle="tooltip" data-placement="right" title="Mon Profil">
             <a class="nav-link" href="/client/user-profile">
                 <i class="fa fa-fw fa-user"></i>
                 <span class="nav-link-text">Mon Profil</span>
             </a>
-        </li>
+        </li> -->
 
         <!-- Message when the client is not subscribed -->
         <li *ngIf="!subscription?.isClientSubscribed" class="nav-item">
