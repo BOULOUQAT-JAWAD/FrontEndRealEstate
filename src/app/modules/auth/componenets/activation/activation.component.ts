@@ -28,12 +28,20 @@ export class ActivationComponent implements OnInit{
       response => {
         console.log('User activated:', response);
         this.authService.saveUserInfoInLocalStorage(response);
-        this.router.navigate(
-          ["/client/dashboard"], 
-          { queryParams: { userActivated: true } }
-        ).then(() => {
-          window.location.reload();
-        });
+        if(response.role == "CLIENT"){
+          this.router.navigate(["/client/dashboard"]).then(
+            ()=>{
+              window.location.reload()
+            }
+          )
+        }
+        else if(response.role == "TRAVELER"){
+          this.router.navigate(["/"]).then(
+            ()=>{
+              window.location.reload()
+            }
+          )
+        }
       },
       error => {
         console.error('Activation failed:', error);

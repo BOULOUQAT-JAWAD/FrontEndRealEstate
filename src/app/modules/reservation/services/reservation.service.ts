@@ -18,6 +18,11 @@ export class ReservationService {
     private httpClient: HttpClient
   ) { }
 
+  checkoutReservation(requestPayload: { reservationId: number | undefined; pjServiceIds: number[]; }) {
+    return this.httpClient.post(`${environment.baseUrl}payment/checkout/reservation`,requestPayload);
+  }
+
+
   public getPropertyReservations(propertyId: number, checkinDate?: string, checkoutDate?: string, status?: string): Observable<ReservationResponse[]> {
     // const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
      

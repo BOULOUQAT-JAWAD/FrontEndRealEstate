@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PropertyResponse } from 'src/app/modules/properties/models/property-response';
 import { PropertyType } from 'src/app/modules/properties/models/property-type';
 import { PropertyService } from 'src/app/modules/properties/services/property.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private propertyService: PropertyService,
-    private router: Router
+    private router: Router,
+    private activeRoute:ActivatedRoute,private toast:ToastrService
   ) {
     const currentDate = new Date();
     this.today = currentDate.toISOString().split('T')[0];
@@ -31,6 +34,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterProperties();
+    this.activeRoute.queryParamMap.subscribe(
+      (params)=>{
+        if (params.get("reservation") == 'done'){
+          this.toast.success("Votre reservation est faite avec succee! Merci de verifier votre boite email.")
+        }
+        if (params.get("userSubscribed") == 'true'){
+          this.toast.success("Your subscription is updated successfully")
+        }
+        
+      }
+    );
+
   }
 
   filterProperties() {

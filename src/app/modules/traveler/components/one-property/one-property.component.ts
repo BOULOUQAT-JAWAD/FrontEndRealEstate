@@ -129,6 +129,15 @@ export class OnePropertyComponent implements OnInit {
         pjServiceIds: selectedServiceIds
       };
   
+      this.reservationService.checkoutReservation(requestPayload).subscribe(
+        (data: any) => {
+          console.log(data)
+          window.location.href = data.checkoutUrl;
+        },
+        error => {
+          console.error('Error while trying to subscribe ', error);
+        }
+      );
       console.log('Reservation and Selected Services:', requestPayload);
     });
   }
