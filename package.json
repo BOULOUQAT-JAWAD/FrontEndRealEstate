@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "preinstall": "npx npm-force-resolutions",
-    "postinstall": "ngcc --properties es2015 browser module main" 
+    "postinstall": "ngcc --properties es2015 browser module main"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "ngx-slick-carousel": "^17.0.0",
     "ngx-toastr": "^17.0.2",
     "ngx-webstorage": "^12.0.0",
+    "npm-force-resolutions": "^0.0.10",
     "rxjs": "~7.8.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.9",
