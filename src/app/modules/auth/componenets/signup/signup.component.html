@@ -4,7 +4,7 @@
   <!-- <div id="preloader">
     <div data-loader="circle-side"></div>
   </div> -->
-  <!-- End Preload -->
+  <!-- Fin Prechargement -->
 
   <div id="login">
     <aside>
@@ -13,67 +13,67 @@
       </figure>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" autocomplete="off">
         <div class="form-group">
-          <label for="firstName">Your Name</label>
-          <input class="form-control" type="text" id="firstName" formControlName="firstName" placeholder="Enter your first name">
+          <label for="firstName">Votre prénom</label>
+          <input class="form-control" type="text" id="firstName" formControlName="firstName" placeholder="Entrez votre prénom">
           <i class="ti-user"></i>
           <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
-            First name is required.
+            Le prénom est requis.
           </div>
         </div>
 
         <div class="form-group">
-          <label for="lastName">Your Last Name</label>
-          <input class="form-control" type="text" id="lastName" formControlName="lastName" placeholder="Enter your last name">
+          <label for="lastName">Votre nom</label>
+          <input class="form-control" type="text" id="lastName" formControlName="lastName" placeholder="Entrez votre nom">
           <i class="ti-user"></i>
           <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
-            Last name is required.
+            Le nom est requis.
           </div>
         </div>
 
         <div class="form-group">
-          <label for="email">Your Email</label>
-          <input class="form-control" type="email" id="email" formControlName="email" placeholder="Enter your email">
+          <label for="email">Votre Email</label>
+          <input class="form-control" type="email" id="email" formControlName="email" placeholder="Entrez votre email">
           <i class="icon_mail_alt"></i>
           <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
-            Valid email is required.
+            Un email valide est requis.
           </div>
         </div>
 
         <div class="form-group">
-          <label for="password">Your password</label>
-          <input class="form-control" type="password" id="password" formControlName="password" placeholder="Enter your password">
+          <label for="password">Votre mot de passe</label>
+          <input class="form-control" type="password" id="password" formControlName="password" placeholder="Entrez votre mot de passe">
           <i class="icon_lock_alt"></i>
           <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
-            Password is required (min 6 characters).
+            Le mot de passe est requis (minimum 6 caractères).
           </div>
         </div>
 
         <div class="form-group">
-          <label for="phoneNumber">Your Phone Number</label>
-          <input class="form-control" type="text" id="phoneNumber" formControlName="phoneNumber" placeholder="Enter your phone number">
+          <label for="phoneNumber">Votre numéro de téléphone</label>
+          <input class="form-control" type="text" id="phoneNumber" formControlName="phoneNumber" placeholder="Entrez votre numéro de téléphone">
           <i class="icon_phone"></i>
           <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched">
-            Phone number is required.
+            Le numéro de téléphone est requis.
           </div>
         </div>
 
         <div class="form-group">
-          <label for="role">Role</label>
+          <label for="role">Rôle</label>
           <select id="role" formControlName="role" class="form-control">
-            <option value="">Select a role</option>
+            <option value="">Sélectionnez un rôle</option>
             <option value="CLIENT">CLIENT</option>
-            <option value="TRAVELER">TRAVELER</option>
+            <option value="TRAVELER">VOYAGEUR</option>
          <!--    <option value="ADMIN">ADMIN</option>
-            <option value="PROVIDER">PROVIDER</option> -->
+            <option value="PROVIDER">FOURNISSEUR</option> -->
           </select>
           <div *ngIf="signupForm.get('role')?.invalid && signupForm.get('role')?.touched">
-            Role is required.
+            Le rôle est requis.
           </div>
         </div>
 
         <div id="pass-info" class="clearfix"></div>
-        <button type="submit" class="btn_1 rounded full-width add_top_30">Register Now!</button>
-        <div class="text-center add_top_10">Already have an account? <strong><a href="login">Sign In</a></strong></div>
+        <button type="submit" class="btn_1 rounded full-width add_top_30">S'inscrire maintenant!</button>
+        <div class="text-center add_top_10">Vous avez déjà un compte ? <strong><a href="login">Connectez-vous</a></strong></div>
       </form>
     </aside>
   </div>

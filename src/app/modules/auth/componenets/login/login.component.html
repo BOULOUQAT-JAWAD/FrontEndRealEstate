@@ -13,7 +13,7 @@
 					<input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{'error-input-board' : !formGroup.get('email')?.valid && formGroup.get('email')?.touched}">
 					<i class="icon_mail_alt"></i>
 					<p *ngIf="!formGroup.get('email')?.valid && formGroup.get('email')?.touched" class="error-msg">
-						Can you please enter a valid email
+						Pouvez-vous s'il vous plaît entrer une adresse e-mail valide
 					</p>
 				</div>
 
@@ -22,7 +22,7 @@
 					<input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{'error-input-board' : !formGroup.get('password')?.valid && formGroup.get('password')?.touched}">
 					<i class="icon_lock_alt"></i>
 					<p *ngIf="!formGroup.get('password')?.valid && formGroup.get('password')?.touched" class="error-msg">
-						Can you please enter a valid password
+						Pouvez-vous s'il vous plaît entrer un mot de passe valide
 					</p>
 				</div>
 
@@ -44,7 +44,7 @@
 				<div class="text-center add_top_10">Nouveau compte? <strong><a routerLink="/signup">Sign up!</a></strong></div>
 
 				<div *ngIf="isLoginError" class="login-error shake-horizontal">
-					<p>Login Failed. Please check your credentials and try again.</p>
+					<p>Connexion échouée. Veuillez vérifier vos identifiants et réessayer.</p>
 				</div>
 			</form>
 		</aside>

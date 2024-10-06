@@ -33,7 +33,7 @@ export class PjServicesListComponent implements OnInit{
       },
       error: (err) => {
         console.error('Error fetching properties', err);
-        this.error = 'Failed to load properties. Please try again later.';
+        this.error = 'Impossible de charger les propriétés. Veuillez réessayer ultérieurement.';
       }
     });
   }
@@ -45,7 +45,7 @@ export class PjServicesListComponent implements OnInit{
       },
       error: (err) => {
         console.error('Error fetching services', err);
-        this.error = 'Failed to load services. Please try again later.';
+        this.error = 'Impossible de charger les services. Veuillez réessayer ultérieurement.';
       }
     });
   }

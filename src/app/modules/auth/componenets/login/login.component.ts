@@ -36,15 +36,15 @@ export class LoginComponent implements OnInit{
       (params)=>{
         if (params.get("registered") == 'true'){
           console.log("coco")
-          this.toastr.success("Please Check your inbox for activation email activate your account before you Login!"
-            ,"Sign Up Successful")
+          this.toastr.success("Veuillez vérifier votre boîte de réception pour l'e-mail d'activation afin d'activer votre compte avant de vous connecter !"
+,"Inscription réussie")
         }
       }
     );
     this.activeRoute.queryParamMap.subscribe(
       (params)=>{
         if (params.get("loggedin") == 'false'){
-          this.toastr.info("Please Log in first")
+          this.toastr.info("Veuillez d'abord vous connecter")
         }
       }
     );
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit{
       error => {
         this.isloading=false
         console.log("error")
-        this.toastr.error("the email or the password you entered are not correct!")
+        this.toastr.error("l'email ou le mot de passe que vous avez saisi ne sont pas corrects !")
       }
     )
     // this.loginService.login(this.loginReq).subscribe(

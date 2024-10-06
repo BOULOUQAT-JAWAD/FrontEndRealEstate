@@ -17,10 +17,10 @@ export class MyDashboardComponent implements OnInit{
     this.activeRoute.queryParamMap.subscribe(
       (params)=>{
         if (params.get("userActivated") == 'true'){
-          this.toast.success("Your account is activated successfully")
+          this.toast.success("Votre compte est activé avec succès")
         }
         if (params.get("userSubscribed") == 'true'){
-          this.toast.success("Your subscription is updated successfully")
+          this.toast.success("Votre abonnement a été mis à jour avec succès")
         }
         
       }

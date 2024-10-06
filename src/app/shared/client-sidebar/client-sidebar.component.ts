@@ -33,7 +33,13 @@ navigateToCart() {
       },
       error => {
         console.error('Error fetching subscription data', error);
-        this.subscription = null;
+        this.subscription = {
+          subscriptionClientId: "12345",
+          annualPrice: 99.99,
+          subsDate: new Date("2023-01-01"),
+          endSubsDate: new Date("2023-12-31"),
+          isClientSubscribed: false
+      };
       }
     );
   }

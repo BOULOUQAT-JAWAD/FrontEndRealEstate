@@ -39,7 +39,7 @@ export class  SignupComponent implements OnInit{
           this.router.navigate(["/login"],{queryParams:{registered:true}})
         },
         error => {
-          this.toastr.error("Something went wrong! Please try again")
+          this.toastr.error("Une erreur s'est produite ! Veuillez réessayer")
 
         }
       )
