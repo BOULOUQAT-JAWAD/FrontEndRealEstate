@@ -1,0 +1,6 @@
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+[build]
+  node_version = "16.14.2"
