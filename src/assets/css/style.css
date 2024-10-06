@@ -839,6 +839,7 @@ header.header_in {
   background-color: #fff;
   position: relative;
   border-bottom: 1px solid #ededed;
+  z-index: 1;
 }
 header.header_in.is_sticky {
   position: fixed;
@@ -865,7 +866,7 @@ header.header_in ul#top_menu li a {
     float: none;
   }
   header.header_in #logo a {
-    z-index: 9;
+    z-index: 1;
     position: relative;
   }
 }
