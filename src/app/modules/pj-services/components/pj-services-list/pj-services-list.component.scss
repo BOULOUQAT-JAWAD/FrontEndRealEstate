@@ -42,7 +42,6 @@ button {
 button:hover {
     background-color: #45a049;
 } */
-
 .service-item {
     margin-bottom: 15px;
 }
@@ -54,9 +53,12 @@ button:hover {
 .table th, .table td {
     text-align: left;
 }
+
 .dropdown-menu {
+    /* Remove display: none */
     max-height: 200px;
     overflow-y: auto;
+    will-change: transform;
 }
 
 .dropdown-item {
@@ -67,3 +69,5 @@ button:hover {
 .dropdown-item input {
     margin-right: 10px;
 }
+
+
