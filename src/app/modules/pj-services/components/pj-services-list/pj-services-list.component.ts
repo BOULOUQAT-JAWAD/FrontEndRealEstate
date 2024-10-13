@@ -58,6 +58,7 @@ export class PjServicesListComponent implements OnInit{
   
     // Handle property-service selection
     onPropertyServiceChange(serviceId: number,serviceTitle:string,servicePrice:number, propertyId: number, propertyTitle:string,event: Event) {
+      console.log("dep")
       const inputElement = event.target as HTMLInputElement;
       const isSelected = inputElement.checked;
       const selectedPropertiesIdStr :string =  propertyId+"-"+propertyTitle;

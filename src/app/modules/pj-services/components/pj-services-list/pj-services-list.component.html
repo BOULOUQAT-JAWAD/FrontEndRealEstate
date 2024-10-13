@@ -41,10 +41,10 @@
               <div class="dropdown-menu" >
                 <div *ngFor="let property of propertiesList; trackBy: trackByProperty" class="dropdown-item">
                   <input type="checkbox" 
-                         [(ngModel)]="selectedProperties[property.propertyId]" 
-                         [id]="'property-' + service.pjServiceId + '-' + property.propertyId" 
-                         [value]="service.pjServiceId" 
-                         (change)="onPropertyServiceChange(service.pjServiceId, service.title, service.price, property.propertyId, property.title, $event)" />
+                  [(ngModel)]="selectedProperties[service.pjServiceId + '-' + property.propertyId]"
+                  [id]="'property-' + service.pjServiceId + '-' + property.propertyId" 
+                  [value]="service.pjServiceId" 
+                  (change)="onPropertyServiceChange(service.pjServiceId, service.title, service.price, property.propertyId, property.title, $event)" />           
                   <label [for]="'property-' + service.pjServiceId + '-' + property.propertyId">{{ property.title }}</label>
                 </div>                
               </div>
